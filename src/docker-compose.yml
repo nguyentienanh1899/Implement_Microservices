@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+    #database section
+    sqlserverdb:
+        image: mcr.microsoft.com/mssql/server:2019-latest
+
+    #networks section
+    networks:
+        default:
+            name: anhnguyen_microservices
+            driver: bridge
+
+    #volumes section
+    volumes:
+        sqlserver_data:
+            name: sqlserver_data
+
+
+            
