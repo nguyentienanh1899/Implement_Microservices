@@ -26,26 +26,26 @@ services:
     image: 'docker.elastic.co/kibana/kibana:7.17.2'
 
 #networks section
-  networks:
-    default:
-      name: anhnguyen_microservices
-      driver: bridge
+networks:
+  default:
+    name: anhnguyen_microservices
+    driver: bridge
 
 #volumes section
-  volumes:
-    sqlserver_data:
-      name: sqlserver_data
-    mysql_data:
-      name: mysql_data
-    postgres_data:
-      name: postgres_data
-    portainer_data:
-      name: portainer_data
-    elasticsearch_data:
-      name: elasticsearch_data
-    jaeger_data:
-      name: jaeger_data
-    mongo_data:
-      name: mongo_data
-    pgadmin_data:
-      name: pgadmin_data
+volumes:
+  sqlserver_data:
+    name: sqlserver_data
+  mysql_data:
+    name: mysql_data
+  postgres_data:
+    name: postgres_data
+  portainer_data:
+    name: portainer_data
+  elasticsearch_data:
+    name: elasticsearch_data
+  jaeger_data:
+    name: jaeger_data
+  mongo_data:
+    name: mongo_data
+  pgadmin_data:
+    name: pgadmin_data
