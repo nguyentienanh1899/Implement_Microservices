@@ -5,7 +5,7 @@ namespace Common.Logging
 {
     public static class Serilogger
     {
-        public static Action<HostBuilderContext, LoggerConfiguration> Configuration =>
+        public static Action<HostBuilderContext, LoggerConfiguration> Configure =>
             (context, configuration) =>
             {
                 var applicationName = context.HostingEnvironment.ApplicationName?.ToLower().Replace(".", "-");
