@@ -19,7 +19,10 @@ try
     app.UseInfrastructure();
 
     // add migration when run project
-    app.MigrateDatabase<ProductContext>().Run();
+    app.MigrateDatabase<ProductContext>((context, _) =>
+    {
+        ProductContextSeed.SeedProductAsync(context, Log.Logger).Wait();
+    }).Run();
 } 
 catch (Exception ex)
 {
