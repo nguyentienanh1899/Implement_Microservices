@@ -4,6 +4,10 @@ namespace Product.API.Extensions
 {
     public static class ConfigureHostExtensions
     {
+        /// <summary>
+        /// Get environment variables from appsetting.
+        /// </summary>
+        /// <param name="host"></param>
         public static void AddAppConfigurations(this ConfigureHostBuilder host)
         {
             host.ConfigureAppConfiguration((context, config) =>

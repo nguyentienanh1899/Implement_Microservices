@@ -19,7 +19,7 @@ namespace Product.API.Extensions
                 try
                 {
                     logger.LogInformation("Migrating mysql database.");
-                    ExcuteMigrations(context);
+                    ExcuteMigrations(context!);
                     
                 }
                 catch (Exception ex)
