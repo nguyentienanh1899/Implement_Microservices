@@ -38,6 +38,11 @@ namespace Product.API.Extensions
             seeder(context,services);
         }
 
+        /// <summary>
+        /// Excute database migration
+        /// </summary>
+        /// <typeparam name="TContext"></typeparam>
+        /// <param name="context"></param>
         private static void ExcuteMigrations<TContext>(TContext context) where TContext : DbContext
         {
             context.Database.Migrate();
