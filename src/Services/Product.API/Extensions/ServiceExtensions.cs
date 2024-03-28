@@ -22,6 +22,8 @@ namespace Product.API.Extensions
             // add configuration for product context (MySql) 
             services.ConfigurationProductDbContext(configuration);
             services.AddInfrastructureServices();
+            // auto mapper
+            services.AddAutoMapper(x => x.AddProfile(new MappingProfile()));
             return services;
         }
 
@@ -39,6 +41,11 @@ namespace Product.API.Extensions
             return services;
         }
 
+        /// <summary>
+        /// Add service repository.
+        /// </summary>
+        /// <param name="services"></param>
+        /// <returns></returns>
         private static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
         {
             return services.AddScoped(typeof(IRepositoryBaseAsync<,,>), typeof(RepositoryBaseAsync<,,>))

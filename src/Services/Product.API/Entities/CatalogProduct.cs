@@ -8,22 +8,20 @@ namespace Product.API.Entities
     {
         [Required]
         [Column(TypeName = "nvarchar(150)")]
-        public string? No { get; set; }
+        public string No { get; set; } = string.Empty;
 
         [Required]
         [Column(TypeName = "nvarchar(250)")]
-        public string? Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         [Column(TypeName = "nvarchar(255)")]
-        public string? Summary { get; set; }
+        public string Summary { get; set; } = string.Empty;
 
         [Required]
         [Column(TypeName = "text")]
-        public string? Description { get; set; }
+        public string Description { get; set; } = string.Empty;
 
         [Column(TypeName = "decimal(12,2)")]
-        public decimal? Price { get; set; }
-
-
+        public decimal Price { get; set; }
     }
 }
