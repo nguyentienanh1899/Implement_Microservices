@@ -45,6 +45,11 @@ namespace Product.API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateProduct([FromBody] CreateProductDto prodcutDto)
         {
+            var productEntity = await _repository.GetProductByNo(prodcutDto.No);
+            if (productEntity != null)
+            {
+                return BadRequest($"Product No: {prodcutDto.No} is exitsed.");
+            }
             var product = _mapper.Map<CatalogProduct>(prodcutDto);
             await _repository.CreateProduct(product);
             await _repository.SaveChangesAsync();
