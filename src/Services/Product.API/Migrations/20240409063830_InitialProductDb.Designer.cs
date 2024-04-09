@@ -11,8 +11,8 @@ using Product.API.Persistence;
 namespace Product.API.Migrations
 {
     [DbContext(typeof(ProductContext))]
-    [Migration("20240321041653_Init_ProductDB")]
-    partial class Init_ProductDB
+    [Migration("20240409063830_InitialProductDb")]
+    partial class InitialProductDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,13 +45,17 @@ namespace Product.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(150)");
 
-                    b.Property<decimal?>("Price")
+                    b.Property<decimal>("Price")
                         .HasColumnType("decimal(12,2)");
 
                     b.Property<string>("Summary")
+                        .IsRequired()
                         .HasColumnType("nvarchar(255)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("No")
+                        .IsUnique();
 
                     b.ToTable("Products");
                 });

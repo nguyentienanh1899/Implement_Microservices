@@ -43,13 +43,17 @@ namespace Product.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(150)");
 
-                    b.Property<decimal?>("Price")
+                    b.Property<decimal>("Price")
                         .HasColumnType("decimal(12,2)");
 
                     b.Property<string>("Summary")
+                        .IsRequired()
                         .HasColumnType("nvarchar(255)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("No")
+                        .IsUnique();
 
                     b.ToTable("Products");
                 });
