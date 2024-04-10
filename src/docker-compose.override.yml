@@ -97,3 +97,16 @@ services:
         - elasticsearch
       ports:
         - "5601:5601"
+
+  #microservices api sections
+  product.api:
+    container_name: product.api
+    environment:
+        - ASPNETCORE_ENVIRONMENT=Development
+        - ASPNETCORE_URLS=http://+:80
+        - "ConnectionStrings:DefaultConnectionString=Server=productdb;Port=3306;Database=ProductDB;User=root;Password=Anhnguyen18;"
+    depends_on:
+        - productdb
+    ports:
+        - "6002:80" #Docker containers run on a separate port for easy distinction.
+    restart: always

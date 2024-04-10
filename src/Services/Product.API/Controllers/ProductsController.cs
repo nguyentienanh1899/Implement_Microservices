@@ -84,11 +84,11 @@ namespace Product.API.Controllers
         #endregion
 
         #region Additional Resources
-        [HttpGet("{get-product-by-no/productNo}")]
+        [HttpGet("getproductbyno/{productNo}")]
         public async Task<IActionResult> GetProductByNo([Required] string productNo)
         {
             var product = await _repository.GetProductByNo(productNo);
-            if(product == null)
+            if (product == null)
                 return NotFound();
             var result = _mapper.Map<ProductDto>(product);
             return Ok(result);
