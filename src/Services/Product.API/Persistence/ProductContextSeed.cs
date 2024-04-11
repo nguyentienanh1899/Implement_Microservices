@@ -28,7 +28,7 @@ namespace Product.API.Persistence
                 },
                 new()
                 {
-                    No = "Iphone",
+                    No = "Iphone2",
                     Name = "Iphone11",
                     Summary = "IPhone 11: pinnacle of Apple tech, advanced camera, blazing A16 chip, stunning display.",
                     Description = "Sleek design, powerful A16 chip, AI-driven camera, vibrant OLED display. Experience innovation with iPhone 15.",
