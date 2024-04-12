@@ -27,9 +27,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingB
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApps", "WebApps", "{646471FD-9380-4F4F-A116-4F91C8C33189}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Logging", "src\BuildingBlocks\Common.Logging\Common.Logging.csproj", "{02B52860-EE80-4A82-81E6-1D20ABDF899D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Logging", "src\BuildingBlocks\Common.Logging\Common.Logging.csproj", "{02B52860-EE80-4A82-81E6-1D20ABDF899D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBus.Messages", "src\BuildingBlocks\EventBus.Messages\EventBus.Messages.csproj", "{5E22B7BC-7F2C-4E26-B999-8ABE3DCA2DA1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.Messages", "src\BuildingBlocks\EventBus.Messages\EventBus.Messages.csproj", "{5E22B7BC-7F2C-4E26-B999-8ABE3DCA2DA1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Product", "Product", "{C25C56C6-62FD-4944-870B-E9FC3CCB72F3}"
 EndProject
@@ -43,27 +43,27 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Inventory", "Inventory", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ScheduledJob", "ScheduledJob", "{D1A5895A-E353-4D05-9783-E3DD03FF12F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebHealthStatus", "src\WebApps\WebHealthStatus\WebHealthStatus.csproj", "{A154C94D-1525-439E-91F9-BBA878C83D90}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebHealthStatus", "src\WebApps\WebHealthStatus\WebHealthStatus.csproj", "{A154C94D-1525-439E-91F9-BBA878C83D90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basket.API", "src\Services\Basket.API\Basket.API.csproj", "{34481DC6-80F4-42EA-BD8A-9C82E40DD58D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basket.API", "src\Services\Basket.API\Basket.API.csproj", "{34481DC6-80F4-42EA-BD8A-9C82E40DD58D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Customer.API", "src\Services\Customer.API\Customer.API.csproj", "{00FF1D72-8B88-4C05-9F84-223E2C9C9282}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Customer.API", "src\Services\Customer.API\Customer.API.csproj", "{00FF1D72-8B88-4C05-9F84-223E2C9C9282}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventory.Product.API", "src\Services\Inventory.Product.API\Inventory.Product.API.csproj", "{9B6BFC54-31D1-4D2D-892F-CB827493F4EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inventory.Product.API", "src\Services\Inventory.Product.API\Inventory.Product.API.csproj", "{9B6BFC54-31D1-4D2D-892F-CB827493F4EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordering.API", "src\Services\Ordering.API\Ordering.API.csproj", "{87FFC85B-034C-47C6-B1E6-CC8B3DB065B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ordering.API", "src\Services\Ordering.API\Ordering.API.csproj", "{87FFC85B-034C-47C6-B1E6-CC8B3DB065B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Product.API", "src\Services\Product.API\Product.API.csproj", "{66DBFA65-937E-450D-BAD2-6A3D33F4B449}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Product.API", "src\Services\Product.API\Product.API.csproj", "{66DBFA65-937E-450D-BAD2-6A3D33F4B449}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hangfire.API", "src\Services\Hangfire.API\Hangfire.API.csproj", "{E1D9B8D6-3D98-4D7B-8083-0BA563E70174}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hangfire.API", "src\Services\Hangfire.API\Hangfire.API.csproj", "{E1D9B8D6-3D98-4D7B-8083-0BA563E70174}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "src\BuildingBlocks\Contracts\Contracts.csproj", "{918EACC8-8D72-4D25-BCD1-E4B16235BF6F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "src\BuildingBlocks\Contracts\Contracts.csproj", "{918EACC8-8D72-4D25-BCD1-E4B16235BF6F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "src\BuildingBlocks\Infrastructure\Infrastructure.csproj", "{C680E13A-933A-4BB3-BA98-EF602883831A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "src\BuildingBlocks\Infrastructure\Infrastructure.csproj", "{C680E13A-933A-4BB3-BA98-EF602883831A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "src\BuildingBlocks\Shared\Shared.csproj", "{A70A9FCE-67FE-4A55-8186-7A6E878470EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "src\BuildingBlocks\Shared\Shared.csproj", "{A70A9FCE-67FE-4A55-8186-7A6E878470EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OcelotApiGw", "src\ApiGateways\OcelotApiGw\OcelotApiGw.csproj", "{EB6EAB10-1BDB-407C-9A16-2EA9E2B42465}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OcelotApiGw", "src\ApiGateways\OcelotApiGw\OcelotApiGw.csproj", "{EB6EAB10-1BDB-407C-9A16-2EA9E2B42465}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -131,7 +131,7 @@ Global
 		{2BE71AA2-CC11-45A2-BBB7-C88CC03F588C} = {5AB85F9A-8E81-4028-8288-B9F50545C933}
 		{C826324E-0C8F-40D6-B712-2C2A7B0D00BA} = {5AB85F9A-8E81-4028-8288-B9F50545C933}
 		{CC08BE95-B4DE-46B9-B3E0-31B4CD473C66} = {5AB85F9A-8E81-4028-8288-B9F50545C933}
-		{646471FD-9380-4F4F-A116-4F91C8C33189} = {5AB85F9A-8E81-4028-8288-B9F50545C933}
+		{646471FD-9380-4F4F-A116-4F91C8C33189} = {D1A5895A-E353-4D05-9783-E3DD03FF12F8}
 		{02B52860-EE80-4A82-81E6-1D20ABDF899D} = {CC08BE95-B4DE-46B9-B3E0-31B4CD473C66}
 		{5E22B7BC-7F2C-4E26-B999-8ABE3DCA2DA1} = {CC08BE95-B4DE-46B9-B3E0-31B4CD473C66}
 		{C25C56C6-62FD-4944-870B-E9FC3CCB72F3} = {C826324E-0C8F-40D6-B712-2C2A7B0D00BA}

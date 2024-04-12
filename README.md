@@ -19,6 +19,7 @@ docker-compose -f docker-compose.yml -f docker-compose.ovveride.yml up -d --remo
 2. Use Visual Studio 2023:
 ## Install Environment:
 - https://dotnet.microsoft.com/download/dotnet/6.0
+- Install package Microsoft.EntityFrameworkCore.Analyzers for Product.API
 
 ## Docker Command: 
 - cd src
