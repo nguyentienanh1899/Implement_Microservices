@@ -23,6 +23,6 @@ docker-compose -f docker-compose.yml -f docker-compose.ovveride.yml up -d --remo
 
 ## Docker Command: 
 - cd src
-- docker-compose -f docker-compose.yml -f docker-compose.ovveride.yml up -d --remove-orphans --build
+- docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d --remove-orphans --build
 ## Application URLs - Development Environment
 - Product API: http://localhost:5002/api/products
