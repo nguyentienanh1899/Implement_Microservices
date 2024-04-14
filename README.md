@@ -26,3 +26,10 @@ docker-compose -f docker-compose.yml -f docker-compose.ovveride.yml up -d --remo
 - docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d --remove-orphans --build
 ## Application URLs - Development Environment
 - Product API: http://localhost:5002/api/products
+
+
+## Customer.API
+Install PostgreSql, PgAdmin4
+Query Tool run command:
+	- CREATE USER admin WITH PASSWORD 'Anhnguyen18';
+	- Login with supper User change role user admin -> supper user.
