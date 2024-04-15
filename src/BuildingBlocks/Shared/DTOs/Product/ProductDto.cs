@@ -5,11 +5,11 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shared.DTOs
+namespace Shared.DTOs.Product
 {
     public class ProductDto
     {
-        public long Id { get; set; }    
+        public long Id { get; set; }
         public string No { get; set; }
         public string Name { get; set; }
         public string Summary { get; set; }
