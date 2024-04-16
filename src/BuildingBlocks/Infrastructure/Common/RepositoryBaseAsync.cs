@@ -11,12 +11,12 @@ using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Infrastructure.Common
 {
-    public class RepositoryBaseAsync<T, K, TContext> : IRepositoryBaseAsync<T, K, TContext> where T : EntityBase<K> where TContext : DbContext
+    public class RepositoryBaseAsync<T, K, TContext> : RepositoryQueryBase<T, K, TContext>, IRepositoryBaseAsync<T, K, TContext> where T : EntityBase<K> where TContext : DbContext
     {
         private readonly TContext _dbContext;
         private readonly IUnitOfWork<TContext> _uniUnitOfWork;
 
-        public RepositoryBaseAsync(TContext dbContext, IUnitOfWork<TContext> unitOfWork)
+        public RepositoryBaseAsync(TContext dbContext, IUnitOfWork<TContext> unitOfWork) : base(dbContext)
         {
             _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
             _uniUnitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
@@ -52,30 +52,6 @@ namespace Infrastructure.Common
             await SaveChangesAsync();
             await _dbContext.Database.CommitTransactionAsync();
         }
-
-        public IQueryable<T> FindAll(bool trackChanges = false) => !trackChanges ? _dbContext.Set<T>().AsNoTracking() : _dbContext.Set<T>();
-
-        public IQueryable<T> FindAll(bool trackChanges = false, params Expression<Func<T, object>>[] includeProperties)
-        {
-            var items = FindAll(trackChanges);
-            items = includeProperties.Aggregate(items, (current, includeProperty) => current.Include(includeProperty));
-            return items;
-        }
-
-        public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression, bool trackChanges = false) 
-            => !trackChanges ? _dbContext.Set<T>().Where(expression).AsNoTracking() : _dbContext.Set<T>().Where(expression);
-
-        public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression, bool trackChanges = false, params Expression<Func<T, object>>[] includeProperties)
-        {
-            var items = FindByCondition(expression, trackChanges);
-            items = includeProperties.Aggregate(items, (current, includeProperty) => current.Include(includeProperty));
-            return items;
-        }
-
-        public async Task<T?> GetByIdAsync(K id) => await FindByCondition(x => x.Equals(id)).FirstOrDefaultAsync();
-
-        public async Task<T?> GetByIdAsync(K id, params Expression<Func<T, object>>[] includeProperties)
-            => await FindByCondition(x => x.Equals(id), trackChanges: false, includeProperties).FirstOrDefaultAsync();
 
         public Task RollbackTransactionAsync() => _dbContext.Database.RollbackTransactionAsync();
 

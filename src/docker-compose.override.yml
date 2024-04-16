@@ -110,3 +110,15 @@ services:
     ports:
         - "6002:80" #Docker containers run on a separate port for easy distinction.
     restart: always
+
+  customer.api:
+    container_name: customer.api
+    environment:
+        - ASPNETCORE_ENVIRONMENT=Development
+        - ASPNETCORE_URLS=http://+:80
+        - "ConnectionStrings:DefaultConnectionString=Server=customerdb;Port=5432;Database=CustomerDb;User Id=admin;Password=Anhnguyen18;"
+    depends_on:
+        - customerdb
+    ports:
+        - "6003:80" #Docker containers run on a separate port for easy distinction.
+    restart: always
