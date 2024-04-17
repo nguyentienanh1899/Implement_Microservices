@@ -12,10 +12,11 @@ using Serilog;
 using Shared.DTOs.Customer;
 using System.Net.WebSockets;
 
-var builder = WebApplication.CreateBuilder(args);
-builder.Host.UseSerilog(Serilogger.Configure);
 
-Log.Information("Start Customer API up");
+Log.Logger = new LoggerConfiguration().WriteTo.Console().CreateBootstrapLogger();
+var builder = WebApplication.CreateBuilder(args);
+
+Log.Information($"Start {builder.Environment.ApplicationName} up");
 
 try
 {
@@ -49,7 +50,8 @@ try
         });
     }
 
-    app.UseHttpsRedirection();
+    app.UseRouting();
+    //app.UseHttpsRedirection();
 
     app.UseAuthorization();
 
@@ -67,7 +69,7 @@ catch (Exception ex)
 }
 finally
 {
-    Log.Information("Shut down Customer API complete");
+    Log.Information($"Shut down {builder.Environment.ApplicationName} complete");
     Log.CloseAndFlush();
 }
 
