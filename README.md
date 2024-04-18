@@ -33,3 +33,7 @@ Install PostgreSql, PgAdmin4
 Query Tool run command:
 	- CREATE USER admin WITH PASSWORD 'Anhnguyen18';
 	- Login with supper User change role user admin -> supper user.
+
+
+- Connectionstring Sql Server: Server=ANHNGUYEN\\SQLEXPRESS;Database=OrderDB;Trusted_Connection=True;
+- Add-Migration Update_Configuration_OrderStatus -Project "Ordering.Infrastructure" -StartupProject "Ordering.API" -OutputDir "Persistence\Migrations"
