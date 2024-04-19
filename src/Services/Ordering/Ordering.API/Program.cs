@@ -1,6 +1,8 @@
 using Common.Logging;
 using Serilog;
 using Ordering.Infrastructure;
+using Ordering.API.Extensions;
+using Ordering.Application;
 
 Log.Logger = new LoggerConfiguration().WriteTo.Console().CreateBootstrapLogger();
 var builder = WebApplication.CreateBuilder(args);
@@ -9,9 +11,11 @@ Log.Information($"Start {builder.Environment.ApplicationName} up");
 
 try
 {
-
     builder.Host.UseSerilog(Serilogger.Configure);
 
+    builder.Host.AddAppConfigurations();
+    builder.Services.AddConfigurationSettings(builder.Configuration);
+    builder.Services.AddApplicationServices();
     builder.Services.AddInfrastructureServices(builder.Configuration);
     builder.Services.AddControllers();
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -24,7 +28,7 @@ try
     if (app.Environment.IsDevelopment())
     {
         app.UseSwagger();
-        app.UseSwaggerUI();
+        app.UseSwaggerUI(x => x.SwaggerEndpoint("/swagger/v1/swagger.json","Swagger Order API v1"));
     }
 
     //Seeding Data 

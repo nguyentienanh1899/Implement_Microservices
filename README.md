@@ -34,6 +34,10 @@ Query Tool run command:
 	- CREATE USER admin WITH PASSWORD 'Anhnguyen18';
 	- Login with supper User change role user admin -> supper user.
 
+## Ordering.API
 
 - Connectionstring Sql Server: Server=ANHNGUYEN\\SQLEXPRESS;Database=OrderDB;Trusted_Connection=True;
 - Add-Migration Update_Configuration_OrderStatus -Project "Ordering.Infrastructure" -StartupProject "Ordering.API" -OutputDir "Persistence\Migrations"
+
+- Configuration SMTP(google):
+	1. Create App Password in google account (Enable 2 step authentication in Google account)
