@@ -65,7 +65,7 @@ services:
   pgadmin:
     container_name: pgadmin
     environment:
-        - PGADMIN_DEFAULT_EMAIL=admin@anhnguyen_microservices.com
+        - PGADMIN_DEFAULT_EMAIL=nguyentienanh1899@gmail.com
         - PGADMIN_DEFAULT_PASSWORD=Anhnguyen18
     restart: always
     ports:
@@ -139,4 +139,17 @@ services:
         - basketdb
     ports:
         - "6004:80" #Docker containers run on a separate port for easy distinction.
+    restart: always
+
+   
+  ordering.api:
+    container_name: ordering.api
+    environment:
+        - ASPNETCORE_ENVIRONMENT=Development
+        - ASPNETCORE_URLS=http://+:80
+        - "ConnectionStrings:DefaultConnectionString=Server=orderdb;Database=OrderDB;User Id=sa;Password=Anhnguyen18;MultipleActiveResultSets=True"
+    depends_on:
+        - orderdb
+    ports:
+        - "6005:80" #Docker containers run on a separate port for easy distinction.
     restart: always
