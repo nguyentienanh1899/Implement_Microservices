@@ -41,7 +41,7 @@ namespace Ordering.API.Controllers
             {
                 Body = "Test",
                 Subject = "Test",
-                ToAddress = "nguyentienanh1899@gmail.com",
+                ToAddresses = new List<string> { "nguyentienanh1899@gmail.com" }
             };
 
             await _smtpEmailService.SendEmailAsync(message);

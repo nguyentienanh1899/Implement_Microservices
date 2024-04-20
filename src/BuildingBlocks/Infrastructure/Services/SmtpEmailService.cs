@@ -30,7 +30,7 @@ namespace Infrastructure.Services
                 }.ToMessageBody()
             };
 
-            if(request.ToAddresses.Any())
+            if(request.ToAddresses.Count() > 0)
             {
                 foreach(var toAddress in request.ToAddresses)
                 {
@@ -50,9 +50,9 @@ namespace Infrastructure.Services
                 await _smtpClient.SendAsync(emailMessage, cancellationToken);
                 await _smtpClient.DisconnectAsync(true, cancellationToken);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                _logger.Error(e.Message, e);
+                _logger.Error(ex.Message, ex);
             }
             finally 
             {
