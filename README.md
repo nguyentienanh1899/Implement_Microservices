@@ -36,8 +36,11 @@ Query Tool run command:
 
 ## Ordering.API
 
-- Connectionstring Sql Server: Server=ANHNGUYEN\\SQLEXPRESS;Database=OrderDB;Trusted_Connection=True;
+- Connectionstring Sql Server: Server=ANHNGUYEN\\SQLEXPRESS;Database=OrderDB;User Id=sa;Password=Anhnguyen18;Trusted_Connection=True;
 - Add-Migration Update_Configuration_OrderStatus -Project "Ordering.Infrastructure" -StartupProject "Ordering.API" -OutputDir "Persistence\Migrations"
-
+- Enable account sa 
+- Docker: ConnectionStrings:DefaultConnectionString=Server=orderdb;Database=OrderDB;User Id=sa;Password=Anhnguyen18;MultipleActiveResultSets=True;
 - Configuration SMTP(google):
 	1. Create App Password in google account (Enable 2 step authentication in Google account)
+	2. Configure: SMTP setting with password app created.
+	3. Install:  Mailkit - using client mail.
