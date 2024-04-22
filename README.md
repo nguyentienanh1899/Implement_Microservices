@@ -38,7 +38,9 @@ Query Tool run command:
 
 - Connectionstring Sql Server: Server=ANHNGUYEN\\SQLEXPRESS;Database=OrderDB;User Id=sa;Password=Anhnguyen18;Trusted_Connection=True;
 - Add-Migration Update_Configuration_OrderStatus -Project "Ordering.Infrastructure" -StartupProject "Ordering.API" -OutputDir "Persistence\Migrations"
-- Enable account sa 
+- Enable account sa:
+- run command in query tool: USE mydatabase					
+                             exec sp_changedbowner 'sa', 'true'
 - Docker: ConnectionStrings:DefaultConnectionString=Server=orderdb;Database=OrderDB;User Id=sa;Password=Anhnguyen18;MultipleActiveResultSets=True;
 - Configuration SMTP(google):
 	1. Create App Password in google account (Enable 2 step authentication in Google account)
