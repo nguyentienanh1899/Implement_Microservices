@@ -147,7 +147,7 @@ services:
     environment:
         - ASPNETCORE_ENVIRONMENT=Development
         - ASPNETCORE_URLS=http://+:80
-        - "ConnectionStrings:DefaultConnectionString=Server=orderdb;Database=OrderDB;User Id=sa;Password=Anhnguyen18;MultipleActiveResultSets=True;"
+        - "ConnectionStrings:DefaultConnectionString=Server=orderdb;Database=OrderDB;User Id=sa;Password=Anhnguyen18;MultipleActiveResultSets=True"
     depends_on:
         - orderdb
     ports:
