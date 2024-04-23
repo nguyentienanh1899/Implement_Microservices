@@ -12,6 +12,7 @@ namespace Ordering.Domain.Entities
 {
     public class Order : EntityAuditBase<long>
     {
+        public Guid DocumentNo { get; set; } = Guid.NewGuid();
         [Required]
         [Column(TypeName = "nvarchar(150)")]
         public string UserName { get; set; }
