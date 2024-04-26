@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Ordering.Infrastructure.Repositories
 {
-    public class OrderRepository : RepositoryBaseAsync<Order, long, OrderContext>, IOrderRepository
+    public class OrderRepository : RepositoryBase<Order, long, OrderContext>, IOrderRepository
     {
         public OrderRepository(OrderContext dbContext, IUnitOfWork<OrderContext> unitOfWork) : base(dbContext, unitOfWork)
         {

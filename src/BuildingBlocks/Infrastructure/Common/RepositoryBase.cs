@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 using Contracts;
@@ -11,40 +12,54 @@ using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Infrastructure.Common
 {
-    public class RepositoryBaseAsync<T, K, TContext> : RepositoryQueryBase<T, K, TContext>, IRepositoryBaseAsync<T, K, TContext> where T : EntityBase<K> where TContext : DbContext
+    public class RepositoryBase<T, K, TContext> : RepositoryQueryBase<T, K, TContext>, IRepositoryBase<T, K, TContext> where T : EntityBase<K> where TContext : DbContext
     {
         private readonly TContext _dbContext;
         private readonly IUnitOfWork<TContext> _uniUnitOfWork;
 
-        public RepositoryBaseAsync(TContext dbContext, IUnitOfWork<TContext> unitOfWork) : base(dbContext)
+        public RepositoryBase(TContext dbContext, IUnitOfWork<TContext> unitOfWork) : base(dbContext)
         {
             _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
             _uniUnitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
         public Task<IDbContextTransaction> BeginTransactionAsync() => _dbContext.Database.BeginTransactionAsync();
 
+        public void Create(T entity) => _dbContext.Set<T>().Add(entity);
+
         public async Task<K> CreateAsync(T entity)
         {
             await _dbContext.Set<T>().AddAsync(entity);
+            await SaveChangesAsync();
             return entity.Id;
+        }
+
+        public IList<K> CreateList(IEnumerable<T> entities)
+        {
+            _dbContext.Set<T>().AddRange(entities);
+            return entities.Select(x=>x.Id).ToList();
         }
 
         public async Task<IList<K>> CreateListAsync(IEnumerable<T> entities)
         {
             await _dbContext.Set<T>().AddRangeAsync(entities);
+            await SaveChangesAsync();
             return entities.Select(x => x.Id).ToList();
         }
 
-        public Task DeleteAsync(T entity)
+        public void Delete(T entity) => _dbContext.Set<T>().Remove(entity);
+
+        public async Task DeleteAsync(T entity)
         {
             _dbContext.Set<T>().Remove(entity);
-            return Task.CompletedTask; 
+            await SaveChangesAsync();
         }
 
-        public Task DeleteListAsync(IEnumerable<T> entities)
+        public void DeleteList(IEnumerable<T> entities) => _dbContext.Set<T>().RemoveRange(entities);
+
+        public async Task DeleteListAsync(IEnumerable<T> entities)
         {
             _dbContext.Set<T>().RemoveRange(entities);
-            return Task.CompletedTask;
+            await SaveChangesAsync();
         }
 
         public async Task EndTransactionAsync()
@@ -58,15 +73,28 @@ namespace Infrastructure.Common
 
         public Task<int> SaveChangesAsync() => _uniUnitOfWork.CommitAsync();
 
-        public Task UpdateAsync(T entity)
+        public void Update(T entity)
         {
-            if(_dbContext.Entry(entity).State == EntityState.Unchanged) return Task.CompletedTask;
+            if (_dbContext.Entry(entity).State == EntityState.Unchanged) return;
+            T exist = _dbContext.Set<T>().Find(entity.Id);
+            _dbContext.Entry(exist).CurrentValues.SetValues(entity);
+        }
+
+        public async Task UpdateAsync(T entity)
+        {
+            if(_dbContext.Entry(entity).State == EntityState.Unchanged) return;
             T exist = _dbContext.Set<T>().Find(entity.Id);
             _dbContext.Entry(exist).CurrentValues.SetValues(entity);
 
-            return Task.CompletedTask;
+            await SaveChangesAsync();
         }
 
-        public Task UpdateListAsync(IEnumerable<T> entities) => _dbContext.Set<T>().AddRangeAsync(entities);
+        public void UpdateList(IEnumerable<T> entities) => _dbContext.Set<T>().AddRange(entities);
+
+        public async Task UpdateListAsync(IEnumerable<T> entities) 
+        {
+            _dbContext.Set<T>().AddRangeAsync(entities);
+            await SaveChangesAsync();
+        }  
     }
 }

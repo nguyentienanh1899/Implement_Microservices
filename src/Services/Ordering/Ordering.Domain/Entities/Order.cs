@@ -7,10 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Ordering.Domain.Enums;
+using Contracts.Common.Events;
+using Ordering.Domain.OrderAggregate.Events;
 
 namespace Ordering.Domain.Entities
 {
-    public class Order : EntityAuditBase<long>
+    public class Order : AuditableEventEntity<long>
     {
         public Guid DocumentNo { get; set; } = Guid.NewGuid();
         [Required]
@@ -40,5 +42,17 @@ namespace Ordering.Domain.Entities
         public string InvoiceAddress { get; set; }
 
         public OrderStatus Status { get; set; }
+
+        public Order AddedOrder()
+        {
+            AddDomainEvent(new OrderCreatedEvent(Id, UserName, DocumentNo.ToString(), TotalPrice, EmailAddress, InvoiceAddress, ShippingAddress));
+            return this;
+        }
+
+        public Order DeletedOrder()
+        {
+            AddDomainEvent(new OrderDeletedEvent(Id));
+            return this;
+        }
     }
 }
