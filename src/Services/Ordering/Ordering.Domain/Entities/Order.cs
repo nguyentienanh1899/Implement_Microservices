@@ -42,10 +42,12 @@ namespace Ordering.Domain.Entities
         public string InvoiceAddress { get; set; }
 
         public OrderStatus Status { get; set; }
+        [NotMapped]
+        public string FullName => FirstName + " " + LastName;
 
         public Order AddedOrder()
         {
-            AddDomainEvent(new OrderCreatedEvent(Id, UserName, DocumentNo.ToString(), TotalPrice, EmailAddress, InvoiceAddress, ShippingAddress));
+            AddDomainEvent(new OrderCreatedEvent(Id, UserName, DocumentNo.ToString(), TotalPrice, EmailAddress, InvoiceAddress, ShippingAddress, FullName));
             return this;
         }
 

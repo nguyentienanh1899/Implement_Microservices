@@ -8,16 +8,32 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
+using Infrastructure.Extensions;
+using Serilog;
+using Contracts.Common.Events;
+using Contracts.Common.Interfaces;
 
 namespace Ordering.Infrastructure.Persistence
 {
     public class OrderContext : DbContext
     {
-        public OrderContext(DbContextOptions<OrderContext> options) : base(options)
+        private readonly IMediator _mediator;
+        private readonly ILogger _logger;
+        public OrderContext(DbContextOptions<OrderContext> options, IMediator mediator, ILogger logger) : base(options)
         {
-
+            _mediator = mediator;
+            _logger = logger;
         }
 
+        private List<BaseEvent> _baseEvent;
+        private void SetBaseEventsBeforeSaveChanges()
+        {
+            var domainEntities = ChangeTracker.Entries<IEventEntity>().Select(x => x.Entity).Where(x => x.DomainEvents().Any()).ToList();
+            _baseEvent = domainEntities.SelectMany(x => x.DomainEvents()).ToList();
+
+            domainEntities.ForEach(x => x.ClearDomainEvent());
+        }
         public DbSet<Order> Orders { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -28,6 +44,7 @@ namespace Ordering.Infrastructure.Persistence
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
+            SetBaseEventsBeforeSaveChanges();
             var modified = ChangeTracker.Entries()
                                 .Where(e => e.State == EntityState.Modified ||
                                             e.State == EntityState.Added ||
@@ -56,7 +73,9 @@ namespace Ordering.Infrastructure.Persistence
                 }
             }
 
-            return base.SaveChangesAsync(cancellationToken);
+            var result = base.SaveChangesAsync(cancellationToken);
+            _mediator.DispatchDomainEventAsync(_baseEvent, _logger);
+            return result;
         }
     }
 }

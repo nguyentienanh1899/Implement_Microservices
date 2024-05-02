@@ -20,8 +20,9 @@ namespace Ordering.Application.Features.V1.Orders.Commands.DeleteOrder
             var orderEntity = await _orderRepository.GetByIdAsync(request.Id);
             if (orderEntity == null) { throw new NotFoundException(nameof(Order), request.Id); }
 
-            await _orderRepository.DeleteAsync(orderEntity);
-            _orderRepository.SaveChangesAsync();
+            _orderRepository.Delete(orderEntity);
+            orderEntity.DeletedOrder();
+            await _orderRepository.SaveChangesAsync();
 
             _logger.Information($"Order {orderEntity.Id} was successfully deleted.");
             return Unit.Value;

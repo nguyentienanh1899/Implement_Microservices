@@ -13,14 +13,12 @@ namespace Ordering.Application.Features.V1.Orders.Commands.CreateOrder
     {
         private readonly IOrderRepository _orderRepository;
         private readonly IMapper _mapper;
-        private readonly ISmtpEmailService _smtpEmailService;
         private ILogger _logger;
         public CreateOrderCommandHandler(IOrderRepository orderRepository, IMapper mapper, ILogger logger, ISmtpEmailService smtpEmailService)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _orderRepository = orderRepository ?? throw new ArgumentNullException(nameof(orderRepository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-            _smtpEmailService = smtpEmailService ?? throw new ArgumentNullException(nameof(smtpEmailService));   
         }
         private readonly string MethodName = "CreateOrderCommandHandler";
         public async Task<ApiResult<long>> Handle(CreateOrderCommand request, CancellationToken cancellationToken)

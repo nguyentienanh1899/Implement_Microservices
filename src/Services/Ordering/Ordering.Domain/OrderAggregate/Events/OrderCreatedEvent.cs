@@ -16,8 +16,9 @@ namespace Ordering.Domain.OrderAggregate.Events
         public decimal TotalPrice { get; private set; }
         public string InvoiceAddress { get; private set; }
         public string ShippingAddress { get; private set; }
+        public string FullName {  get; set; }
 
-        public OrderCreatedEvent(long id, string userName, string documentNo, decimal totalPrice, string emailAddress, string invoiceAddress, string shippingAddress)
+        public OrderCreatedEvent(long id, string userName, string documentNo, decimal totalPrice, string emailAddress, string invoiceAddress, string shippingAddress, string fullName)
         {
             id = Id;
             userName = UserName;
@@ -26,6 +27,7 @@ namespace Ordering.Domain.OrderAggregate.Events
             emailAddress = EmailAddress;
             invoiceAddress = InvoiceAddress;
             shippingAddress = ShippingAddress;
+            fullName = FullName;
         }
     }
 }

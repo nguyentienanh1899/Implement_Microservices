@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Features\V1\Orders\EventHandlers\" />
     <Folder Include="Features\V2\" />
   </ItemGroup>
 
