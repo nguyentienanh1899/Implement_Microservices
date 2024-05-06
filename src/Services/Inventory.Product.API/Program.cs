@@ -1,19 +1,23 @@
 using Common.Logging;
+using Inventory.Product.API.Extentions;
 using Serilog;
 
+Log.Logger = new LoggerConfiguration().WriteTo.Console().CreateBootstrapLogger();
 var builder = WebApplication.CreateBuilder(args);
-builder.Host.UseSerilog(Serilogger.Configure);
 
-Log.Information("Start Inventory API up");
+Log.Information($"Start {builder.Environment.ApplicationName} up");
 
 try
 {
     // Add services to the container.
-
+    builder.Services.AddConfigurationSettings(builder.Configuration);
+    builder.Services.ConfigureMongoDbClient();
     builder.Services.AddControllers();
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
+    builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
+    builder.Services.AddInfrastructureServices();
 
     var app = builder.Build();
 
@@ -24,22 +28,25 @@ try
         app.UseSwaggerUI();
     }
 
-    app.UseHttpsRedirection();
+    //app.UseHttpsRedirection();
 
     app.UseAuthorization();
 
-    app.MapControllers();
+    app.MapDefaultControllerRoute();
 
-    app.Run();
+    app.MigrateDatabase().Run();
 }
 catch (Exception ex)
 {
+    // handeler exception when migration
+    string type = ex.GetType().Name;
+    if (type.Equals("StopTheHostException", StringComparison.Ordinal)) throw;
 
     Log.Fatal(ex, "Unhandled exception");
 }
 finally
 {
-    Log.Information("Shut down Inventory API complete");
+    Log.Information($"Shut down {builder.Environment.ApplicationName} complete");
     Log.CloseAndFlush();
 }
 
