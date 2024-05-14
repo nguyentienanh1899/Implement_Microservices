@@ -1,4 +1,4 @@
-﻿using Contracts;
+﻿using Contracts.Domains;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;

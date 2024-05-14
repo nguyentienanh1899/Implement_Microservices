@@ -1,4 +1,4 @@
-﻿using Contracts.Domains;
+﻿using Contracts.Domains.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

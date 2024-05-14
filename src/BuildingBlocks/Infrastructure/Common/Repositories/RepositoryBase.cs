@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Security.AccessControl;
-using System.Text;
-using System.Threading.Tasks;
-using Contracts;
-using Contracts.Common.Interfaces;
+﻿using Contracts.Common.Interfaces;
+using Contracts.Domains;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace Infrastructure.Common
+namespace Infrastructure.Common.Repositories
 {
     public class RepositoryBase<T, K, TContext> : RepositoryQueryBase<T, K, TContext>, IRepositoryBase<T, K, TContext> where T : EntityBase<K> where TContext : DbContext
     {
@@ -36,7 +29,7 @@ namespace Infrastructure.Common
         public IList<K> CreateList(IEnumerable<T> entities)
         {
             _dbContext.Set<T>().AddRange(entities);
-            return entities.Select(x=>x.Id).ToList();
+            return entities.Select(x => x.Id).ToList();
         }
 
         public async Task<IList<K>> CreateListAsync(IEnumerable<T> entities)
@@ -82,7 +75,7 @@ namespace Infrastructure.Common
 
         public async Task UpdateAsync(T entity)
         {
-            if(_dbContext.Entry(entity).State == EntityState.Unchanged) return;
+            if (_dbContext.Entry(entity).State == EntityState.Unchanged) return;
             T exist = _dbContext.Set<T>().Find(entity.Id);
             _dbContext.Entry(exist).CurrentValues.SetValues(entity);
 
@@ -91,10 +84,10 @@ namespace Infrastructure.Common
 
         public void UpdateList(IEnumerable<T> entities) => _dbContext.Set<T>().AddRange(entities);
 
-        public async Task UpdateListAsync(IEnumerable<T> entities) 
+        public async Task UpdateListAsync(IEnumerable<T> entities)
         {
             _dbContext.Set<T>().AddRangeAsync(entities);
             await SaveChangesAsync();
-        }  
+        }
     }
 }

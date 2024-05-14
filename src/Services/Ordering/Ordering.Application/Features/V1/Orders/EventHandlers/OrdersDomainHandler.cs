@@ -48,5 +48,7 @@ namespace Ordering.Application.Features.V1.Orders.EventHandlers
                 _logger.Error($"Order {notification.Id} failed due to an error with the email serivce: {ex.Message}");
             }
         }
+
+
     }
 }

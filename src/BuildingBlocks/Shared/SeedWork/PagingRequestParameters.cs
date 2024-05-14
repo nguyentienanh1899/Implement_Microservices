@@ -24,6 +24,6 @@ namespace Shared.SeedWork
             set { if (value > 0) { _pageSize = value > maxPageSize ? maxPageSize : value; } }
         }
 
-        public string OrderBy { get; set; }
+        public string? OrderBy { get; set; }
     }
 }

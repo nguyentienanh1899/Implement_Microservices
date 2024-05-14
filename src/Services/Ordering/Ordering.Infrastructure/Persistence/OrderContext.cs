@@ -1,5 +1,4 @@
-﻿using Contracts.Domains;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
+﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore;
 using Ordering.Domain.Entities;
 using System;
@@ -13,6 +12,7 @@ using Infrastructure.Extensions;
 using Serilog;
 using Contracts.Common.Events;
 using Contracts.Common.Interfaces;
+using Contracts.Domains.Interfaces;
 
 namespace Ordering.Infrastructure.Persistence
 {
@@ -22,8 +22,8 @@ namespace Ordering.Infrastructure.Persistence
         private readonly ILogger _logger;
         public OrderContext(DbContextOptions<OrderContext> options, IMediator mediator, ILogger logger) : base(options)
         {
-            _mediator = mediator;
-            _logger = logger;
+            _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         private List<BaseEvent> _baseEvent;
@@ -74,7 +74,7 @@ namespace Ordering.Infrastructure.Persistence
             }
 
             var result = base.SaveChangesAsync(cancellationToken);
-            _mediator.DispatchDomainEventAsync(_baseEvent, _logger);
+            _mediator?.DispatchDomainEventAsync(_baseEvent, _logger);
             return result;
         }
     }

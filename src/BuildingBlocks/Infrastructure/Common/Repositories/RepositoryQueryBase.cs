@@ -1,14 +1,9 @@
-﻿using Contracts;
-using Contracts.Common.Interfaces;
+﻿using Contracts.Common.Interfaces;
+using Contracts.Domains;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Infrastructure.Common
+namespace Infrastructure.Common.Repositories
 {
     public class RepositoryQueryBase<T, K, TContext> : IRepositoryQueryBase<T, K, TContext>
         where T : EntityBase<K>

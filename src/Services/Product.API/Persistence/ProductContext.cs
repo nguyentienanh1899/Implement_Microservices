@@ -1,4 +1,4 @@
-﻿using Contracts.Domains;
+﻿using Contracts.Domains.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Product.API.Entities;
 
