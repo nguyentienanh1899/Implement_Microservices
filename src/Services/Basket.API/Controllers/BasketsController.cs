@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Basket.API.Entities;
+using Basket.API.GrpcServices;
 using Basket.API.Repositories.Interfaces;
 using EventBus.Messages.IntegrationEvents.Events;
 using MassTransit;
@@ -18,12 +19,14 @@ namespace Basket.API.Controllers
         private readonly IBasketRepository _repository;
         private readonly IPublishEndpoint _publishEnpoint;
         private readonly IMapper _mapper;
+        private readonly StockItemGrpcService _stockItemGrpcService;
 
-        public BasketsController(IBasketRepository repository, IPublishEndpoint publishEnpoint, IMapper mapper)
+        public BasketsController(IBasketRepository repository, IPublishEndpoint publishEnpoint, IMapper mapper, StockItemGrpcService stockItemGrpcService)
         {
-            _repository = repository; 
-            _publishEnpoint = publishEnpoint;
-            _mapper = mapper;
+            _repository = repository ?? throw new ArgumentNullException(nameof(repository)); 
+            _publishEnpoint = publishEnpoint ?? throw new ArgumentNullException(nameof(publishEnpoint));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _stockItemGrpcService = stockItemGrpcService ?? throw new ArgumentNullException(nameof(stockItemGrpcService));
         }
 
         [HttpGet("{username}", Name = "GetBasket")]
@@ -38,6 +41,14 @@ namespace Basket.API.Controllers
         [ProducesResponseType(typeof(Cart), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<Cart>> UpdateBasket([FromBody] Cart cart)
         {
+            // Communicate with Inventory.Grpc and check quantity availabel of products
+            foreach (var item in cart.Items)
+            {
+                var stock = await _stockItemGrpcService.GetStock(item.ItemNo);
+                item.SetAvailableQuantity(stock.Quantity);
+            }
+
+
             var options = new DistributedCacheEntryOptions()
                                 .SetAbsoluteExpiration(DateTime.UtcNow.AddHours(1)) //Cache exists in time
                                 .SetSlidingExpiration(TimeSpan.FromMinutes(10));    //Track how long there is no activity
