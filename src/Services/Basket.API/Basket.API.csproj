@@ -10,6 +10,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Protofile\stock.proto" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="Google.Protobuf" Version="3.27.0" />
     <PackageReference Include="Grpc.AspNetCore" Version="2.62.0" />
@@ -33,14 +37,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="..\..\..\..\Inventory.Grpc\Inventory.Grpc\Protos\stock.proto" GrpcServices="Client">
-      <Link>Protofile\stock.proto</Link>
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Protobuf>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Protofile\" />
+    <Protobuf Include="Protofile\stock.proto" GrpcServices="Client" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>
