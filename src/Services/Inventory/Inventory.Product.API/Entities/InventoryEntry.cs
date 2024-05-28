@@ -1,5 +1,6 @@
 ﻿using Contracts.Domains;
 using Infrastructure.Extensions;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Shared.Enums.Inventory;
 
@@ -23,6 +24,7 @@ namespace Inventory.Product.API.Entities
         [BsonElement("itemNo")]
         public string ItemNo {  get; set; }
         [BsonElement("quantity")]
+        [BsonRepresentation(BsonType.Decimal128)]
         public decimal Quantity {  get; set; }
         [BsonElement("externalDocumentNo")]
         public string ExternalDocumentNo {  get; set; } = Guid.NewGuid().ToString();
