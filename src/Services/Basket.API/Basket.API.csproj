@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Protofile\stock.proto" />
+    <None Remove="Protos\stockItem.proto" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,7 +37,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="Protofile\stock.proto" GrpcServices="Client" CopyToOutputDirectory="PreserveNewest" />
+    <Protobuf Include="Protos\stockItem.proto" GrpcServices="Client" />
   </ItemGroup>
 
 </Project>
