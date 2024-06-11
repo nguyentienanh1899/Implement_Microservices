@@ -5,16 +5,17 @@
   "Routes": [
     // Customer API: http://localhost:5003/api/customer
     {
-      "UpstreamPathTemplate": "/api/customers/{username}", // 
+      "UpstreamPathTemplate": "/api/customers/{username}", // Route request from client
       "UpstreamHttpMethod": [
         "GET"
       ], // Method
-      "DownstreamPathTemplate": "/api/customers/{username}", // 
+      "DownstreamPathTemplate": "/api/customers/{username}", // Route request send to backend
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
+        //List port API listen
         {
           "Host": "localhost",
-          "Port":  5003
+          "Port": 5003
         }
       ]
     }
