@@ -1,5 +1,4 @@
-﻿using EventBus.Messages.IntegrationEvents.Events;
-using Infrastructure.Configurations;
+﻿using Infrastructure.Configurations;
 using Infrastructure.Extensions;
 using MassTransit;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -24,7 +23,7 @@ namespace Ordering.API.Extensions
         public static void ConfigureMassTransit(this IServiceCollection services)
         {
             var settings = services.GetOptions<EventBusSettings>("EventBusSettings");
-            if(settings == null || string.IsNullOrEmpty(settings.HostAddress))
+            if (settings == null || string.IsNullOrEmpty(settings.HostAddress))
             {
                 throw new ArgumentNullException("EventBusSettings is not configured");
             }

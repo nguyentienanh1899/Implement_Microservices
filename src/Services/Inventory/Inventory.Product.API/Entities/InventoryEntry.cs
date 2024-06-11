@@ -20,13 +20,13 @@ namespace Inventory.Product.API.Entities
         [BsonElement("documentType")]
         public DocumentType DocumentType { get; set; }
         [BsonElement("documentNo")]
-        public string DocumentNo {  get; set; } = Guid.NewGuid().ToString();
+        public string DocumentNo { get; set; } = Guid.NewGuid().ToString();
         [BsonElement("itemNo")]
-        public string ItemNo {  get; set; }
+        public string ItemNo { get; set; }
         [BsonElement("quantity")]
         [BsonRepresentation(BsonType.Decimal128)]
-        public decimal Quantity {  get; set; }
+        public decimal Quantity { get; set; }
         [BsonElement("externalDocumentNo")]
-        public string ExternalDocumentNo {  get; set; } = Guid.NewGuid().ToString();
+        public string ExternalDocumentNo { get; set; } = Guid.NewGuid().ToString();
     }
 }

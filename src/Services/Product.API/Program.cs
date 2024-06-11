@@ -24,14 +24,14 @@ try
     {
         ProductContextSeed.SeedProductAsync(context, Log.Logger).Wait();
     }).Run();
-} 
+}
 catch (Exception ex)
 {
     // handeler exception when migration
     string type = ex.GetType().Name;
     if (type.Equals("StopTheHostException", StringComparison.Ordinal)) throw;
 
-	Log.Fatal(ex, "Unhandled exception");
+    Log.Fatal(ex, "Unhandled exception");
 }
 finally
 {

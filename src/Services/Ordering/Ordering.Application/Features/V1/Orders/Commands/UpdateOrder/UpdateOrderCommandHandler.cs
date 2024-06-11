@@ -1,16 +1,11 @@
 ﻿using AutoMapper;
 using MediatR;
-using Serilog;
+using Ordering.Application.Common.Exceptions;
 using Ordering.Application.Common.Interfaces;
 using Ordering.Application.Common.Models;
-using Shared.SeedWork;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Ordering.Domain.Entities;
-using Ordering.Application.Common.Exceptions;
+using Serilog;
+using Shared.SeedWork;
 
 namespace Ordering.Application.Features.V1.Orders.Commands.UpdateOrder
 {
@@ -30,7 +25,7 @@ namespace Ordering.Application.Features.V1.Orders.Commands.UpdateOrder
         public async Task<ApiResult<OrderDto>> Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
         {
             var orderEntity = await _orderRepository.GetByIdAsync(request.Id);
-            if(orderEntity == null) { throw new NotFoundException(nameof(Order), request.Id); }
+            if (orderEntity == null) { throw new NotFoundException(nameof(Order), request.Id); }
 
             _logger.Information($"Start: {MethodName} - Order: {request.Id}");
 

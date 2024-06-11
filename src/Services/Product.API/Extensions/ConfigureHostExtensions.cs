@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.Eventing.Reader;
-
-namespace Product.API.Extensions
+﻿namespace Product.API.Extensions
 {
     public static class ConfigureHostExtensions
     {

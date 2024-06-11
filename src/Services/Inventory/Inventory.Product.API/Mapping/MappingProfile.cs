@@ -6,7 +6,8 @@ namespace Inventory.Product.API.Mapping
 {
     public class MappingProfile : Profile
     {
-        public MappingProfile() { 
+        public MappingProfile()
+        {
             CreateMap<InventoryEntry, InventoryEntryDto>().ReverseMap();
             CreateMap<PurchaseProductDto, InventoryEntryDto>();
         }

@@ -1,11 +1,10 @@
 ﻿using AutoMapper;
 using Contracts.Services;
 using MediatR;
-using Serilog;
 using Ordering.Application.Common.Interfaces;
-using Shared.SeedWork;
 using Ordering.Domain.Entities;
-using Shared.Services.Email;
+using Serilog;
+using Shared.SeedWork;
 
 namespace Ordering.Application.Features.V1.Orders.Commands.CreateOrder
 {
@@ -36,6 +35,6 @@ namespace Ordering.Application.Features.V1.Orders.Commands.CreateOrder
             return new ApiSuccessResult<long>(orderEntity.Id);
         }
 
-       
+
     }
 }

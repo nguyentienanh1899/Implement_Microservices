@@ -1,8 +1,8 @@
 ﻿using MediatR;
-using Serilog;
-using Ordering.Application.Common.Interfaces;
 using Ordering.Application.Common.Exceptions;
+using Ordering.Application.Common.Interfaces;
 using Ordering.Domain.Entities;
+using Serilog;
 
 namespace Ordering.Application.Features.V1.Orders.Commands.DeleteOrder
 {

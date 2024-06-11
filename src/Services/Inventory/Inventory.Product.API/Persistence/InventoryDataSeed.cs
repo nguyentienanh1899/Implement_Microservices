@@ -1,5 +1,4 @@
 ﻿using Inventory.Product.API.Entities;
-using Inventory.Product.API.Extentions;
 using MongoDB.Driver;
 using Shared.Configurations;
 
@@ -12,7 +11,7 @@ namespace Inventory.Product.API.Persistence
             var databaseName = databaseSettings.DatabaseName;
             var database = mongoClient.GetDatabase(databaseName);
             var inventoryCollection = database.GetCollection<InventoryEntry>("InventoryEntries");
-            if(await inventoryCollection.EstimatedDocumentCountAsync() == 0)
+            if (await inventoryCollection.EstimatedDocumentCountAsync() == 0)
             {
                 await inventoryCollection.InsertManyAsync(GetPreconfiguredInventoryEntries());
             }

@@ -13,7 +13,7 @@ namespace Ordering.Application.Features.V1.Orders.Commands.UpdateOrder
     {
         public long Id { get; private set; }
 
-        public void SetId(long id) {  Id = id; }
+        public void SetId(long id) { Id = id; }
 
         public void Mapping(Profile profile)
         {

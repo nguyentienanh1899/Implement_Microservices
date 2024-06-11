@@ -1,7 +1,7 @@
 ﻿using Contracts.Services;
 using Infrastructure.Configurations;
-using MimeKit;
 using MailKit.Net.Smtp;
+using MimeKit;
 using Serilog;
 using Shared.Services.Email;
 
@@ -30,9 +30,9 @@ namespace Infrastructure.Services
                 }.ToMessageBody()
             };
 
-            if(request.ToAddresses.Count() > 0)
+            if (request.ToAddresses.Count() > 0)
             {
-                foreach(var toAddress in request.ToAddresses)
+                foreach (var toAddress in request.ToAddresses)
                 {
                     emailMessage.To.Add(MailboxAddress.Parse(toAddress));
                 }
@@ -54,7 +54,7 @@ namespace Infrastructure.Services
             {
                 _logger.Error(ex.Message, ex);
             }
-            finally 
+            finally
             {
                 await _smtpClient.DisconnectAsync(true, cancellationToken);
                 _smtpClient.Dispose();

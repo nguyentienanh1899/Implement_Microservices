@@ -6,7 +6,7 @@ namespace Product.API.Persistence
 {
     public class ProductContext : DbContext
     {
-        public ProductContext(DbContextOptions<ProductContext> options) : base(options) 
+        public ProductContext(DbContextOptions<ProductContext> options) : base(options)
         {
         }
         public DbSet<CatalogProduct> Products { get; set; }
@@ -19,7 +19,7 @@ namespace Product.API.Persistence
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<CatalogProduct>().HasIndex(x=>x.No).IsUnique();
+            modelBuilder.Entity<CatalogProduct>().HasIndex(x => x.No).IsUnique();
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
@@ -34,16 +34,16 @@ namespace Product.API.Persistence
                 switch (item.State)
                 {
                     case EntityState.Added:
-                        if(item.Entity is IDateTracking addedEntity)
+                        if (item.Entity is IDateTracking addedEntity)
                         {
                             addedEntity.CreatedDate = DateTime.UtcNow;
                             item.State = EntityState.Added;
                         }
                         break;
 
-                        case EntityState.Modified:
+                    case EntityState.Modified:
                         Entry(item.Entity).Property("Id").IsModified = false;
-                        if(item.Entity is IDateTracking modifiedEntity)
+                        if (item.Entity is IDateTracking modifiedEntity)
                         {
                             modifiedEntity.LastModifiedDate = DateTime.UtcNow;
                             item.State = EntityState.Modified;

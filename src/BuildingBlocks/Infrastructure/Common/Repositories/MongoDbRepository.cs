@@ -40,7 +40,7 @@ namespace Infrastructure.Common.Repositories
 
         private static string GetCollectionName()
         {
-            return (typeof(T).GetCustomAttributes(typeof(BsonCollectionAttribute), true).FirstOrDefault() as BsonCollectionAttribute)?.CollectionName;    
+            return (typeof(T).GetCustomAttributes(typeof(BsonCollectionAttribute), true).FirstOrDefault() as BsonCollectionAttribute)?.CollectionName;
         }
     }
 }

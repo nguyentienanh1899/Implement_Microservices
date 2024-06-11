@@ -1,4 +1,3 @@
-using AutoMapper;
 using Basket.API.Extensions;
 using Basket.API.Mapping;
 using Common.Logging;
@@ -12,8 +11,6 @@ Log.Information($"Start {builder.Environment.ApplicationName} up");
 
 try
 {
-    
-    builder.Host.UseSerilog(Serilogger.Configure);
     builder.Host.AddAppConfigurations();
     builder.Services.AddConfigurationSettings(builder.Configuration);
     builder.Services.AddAutoMapper(x => x.AddProfile(new MappingProfile()));

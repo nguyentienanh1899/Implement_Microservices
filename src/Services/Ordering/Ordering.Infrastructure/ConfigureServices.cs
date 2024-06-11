@@ -8,11 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Ordering.Application.Common.Interfaces;
 using Ordering.Infrastructure.Persistence;
 using Ordering.Infrastructure.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ordering.Infrastructure
 {

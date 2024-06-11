@@ -1,6 +1,5 @@
 ﻿using Infrastructure.Common.Models;
 using Inventory.Product.API.Services.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Shared.DTOs.Inventory;
 using System.ComponentModel.DataAnnotations;
@@ -61,7 +60,7 @@ namespace Inventory.Product.API.Controllers
         public async Task<ActionResult<InventoryEntryDto>> DeleteById([Required] string id)
         {
             var entity = await _inventoryServices.GetByIdAsync(id);
-            if(entity == null) return NotFound();
+            if (entity == null) return NotFound();
             await _inventoryServices.DeleteAsync(id);
             return NoContent();
         }

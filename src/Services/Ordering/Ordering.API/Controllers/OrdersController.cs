@@ -26,7 +26,8 @@ namespace Ordering.API.Controllers
             _smtpEmailService = smtpEmailService ?? throw new ArgumentNullException(nameof(smtpEmailService));
         }
 
-        public static class RouteNames { 
+        public static class RouteNames
+        {
             public const string GetOrders = nameof(GetOrders);
             public const string CreateOrder = nameof(CreateOrder);
             public const string DeleteOrder = nameof(DeleteOrder);
@@ -60,7 +61,7 @@ namespace Ordering.API.Controllers
             return Ok(result);
         }
 
-        [HttpDelete("{id:long}",Name = RouteNames.DeleteOrder)]
+        [HttpDelete("{id:long}", Name = RouteNames.DeleteOrder)]
         [ProducesResponseType(typeof(NoContentResult), (int)HttpStatusCode.NoContent)]
         public async Task<ActionResult<NoContentResult>> DeleteOrder([Required] long id)
         {
@@ -71,7 +72,7 @@ namespace Ordering.API.Controllers
 
         #endregion
         // Test Send Email
-        [HttpGet]   
+        [HttpGet]
         public async Task<IActionResult> TestEmail()
         {
             var message = new MailRequest

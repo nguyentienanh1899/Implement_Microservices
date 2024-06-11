@@ -32,7 +32,8 @@ namespace Inventory.Product.API.Extentions
         private static string GetMongoConnectionString(this IServiceCollection services)
         {
             var settings = services.GetOptions<MongoDbSettings>(nameof(MongoDbSettings));
-            if(settings == null || string.IsNullOrEmpty(settings.ConnectionString)) {
+            if (settings == null || string.IsNullOrEmpty(settings.ConnectionString))
+            {
                 throw new ArgumentNullException("DatabaseSettings is not configured");
             }
 

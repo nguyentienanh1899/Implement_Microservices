@@ -1,11 +1,5 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Mappings
 {
@@ -17,7 +11,7 @@ namespace Infrastructure.Mappings
             var sourceType = typeof(TSource);
             var destinationProperties = typeof(TDestination).GetProperties(flags);
 
-            foreach ( var property in destinationProperties)
+            foreach (var property in destinationProperties)
             {
                 if (sourceType.GetProperty(property.Name, flags) == null)
                     expression.ForMember(property.Name, opt => opt.Ignore());

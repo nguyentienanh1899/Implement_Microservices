@@ -3,7 +3,6 @@ using Infrastructure.Common.Models;
 using Infrastructure.Common.Repositories;
 using Infrastructure.Extensions;
 using Inventory.Product.API.Entities;
-using Inventory.Product.API.Extentions;
 using Inventory.Product.API.Services.Interfaces;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -22,7 +21,7 @@ namespace Inventory.Product.API.Services
 
         public async Task<IEnumerable<InventoryEntryDto>> GetAllByItemNoAsync(string itemNo)
         {
-            var entities = await FindAll().Find(x=>x.ItemNo.Equals(itemNo)).ToListAsync();
+            var entities = await FindAll().Find(x => x.ItemNo.Equals(itemNo)).ToListAsync();
             var result = _mapper.Map<IEnumerable<InventoryEntryDto>>(entities);
             return result;
         }
@@ -45,7 +44,7 @@ namespace Inventory.Product.API.Services
 
         public async Task<InventoryEntryDto> GetByIdAsync(string id)
         {
-            FilterDefinition<InventoryEntry> filter = Builders<InventoryEntry>.Filter.Eq(x=>x.Id, id);
+            FilterDefinition<InventoryEntry> filter = Builders<InventoryEntry>.Filter.Eq(x => x.Id, id);
             var entity = await FindAll().Find(filter).FirstOrDefaultAsync();
             var result = _mapper.Map<InventoryEntryDto>(entity);
             return result;
@@ -59,7 +58,7 @@ namespace Inventory.Product.API.Services
                 Quantity = purchaseProduct.Quantity,
                 DocumentType = purchaseProduct.DocumentType
             };
-            
+
             await CreateAsync(itemToAdd);
             var result = _mapper.Map<InventoryEntryDto>(itemToAdd);
             return result;

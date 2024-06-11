@@ -11,12 +11,12 @@ namespace Inventory.Product.API.Extentions
             using var scope = host.Services.CreateScope();
             var services = scope.ServiceProvider;
             var settings = services.GetService<MongoDbSettings>();
-            if(settings == null || string.IsNullOrEmpty(settings.ConnectionString))
+            if (settings == null || string.IsNullOrEmpty(settings.ConnectionString))
             {
                 throw new ArgumentNullException("DatabaseSettings is not configured.");
             }
             var mongoClient = services.GetRequiredService<IMongoClient>();
-            new InventoryDataSeed().SeedDataAsync(mongoClient,settings).Wait();
+            new InventoryDataSeed().SeedDataAsync(mongoClient, settings).Wait();
             return host;
         }
     }

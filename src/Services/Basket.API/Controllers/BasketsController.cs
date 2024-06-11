@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
-using System.Net.WebSockets;
 
 namespace Basket.API.Controllers
 {
@@ -23,7 +22,7 @@ namespace Basket.API.Controllers
 
         public BasketsController(IBasketRepository repository, IPublishEndpoint publishEnpoint, IMapper mapper, StockItemGrpcService stockItemGrpcService)
         {
-            _repository = repository ?? throw new ArgumentNullException(nameof(repository)); 
+            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
             _publishEnpoint = publishEnpoint ?? throw new ArgumentNullException(nameof(publishEnpoint));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _stockItemGrpcService = stockItemGrpcService ?? throw new ArgumentNullException(nameof(stockItemGrpcService));
@@ -31,7 +30,7 @@ namespace Basket.API.Controllers
 
         [HttpGet("{username}", Name = "GetBasket")]
         [ProducesResponseType(typeof(Cart), (int)HttpStatusCode.OK)]
-        public  async Task<ActionResult<Cart>> GetBasketByUserName([Required] string username)
+        public async Task<ActionResult<Cart>> GetBasketByUserName([Required] string username)
         {
             var result = await _repository.GetBasketByUserName(username);
             return Ok(result ?? new Entities.Cart());
@@ -57,7 +56,7 @@ namespace Basket.API.Controllers
             return Ok(result);
         }
 
-        [HttpDelete("{username}",Name = "DeleteBasket")]
+        [HttpDelete("{username}", Name = "DeleteBasket")]
         [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<bool>> DeleteBasket([Required] string username)
         {
@@ -72,7 +71,7 @@ namespace Basket.API.Controllers
         public async Task<IActionResult> Checkout([FromBody] BasketCheckout basketCheckout)
         {
             var basket = await _repository.GetBasketByUserName(basketCheckout.UserName);
-            if(basket == null) return NotFound();
+            if (basket == null) return NotFound();
 
             //publish checkout event to Eventbus Message
             var eventMessage = _mapper.Map<BasketCheckoutEvent>(basketCheckout);
@@ -81,6 +80,6 @@ namespace Basket.API.Controllers
             //remove basket
             await _repository.DeleteBasketFromUserName(basketCheckout.UserName);
             return Accepted();
-        }   
+        }
     }
 }

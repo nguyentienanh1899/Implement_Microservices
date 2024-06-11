@@ -3,7 +3,6 @@ using EventBus.Messages.IntegrationEvents.Events;
 using MassTransit;
 using MediatR;
 using Ordering.Application.Features.V1.Orders.Commands.CreateOrder;
-using Serilog;
 
 namespace Ordering.API.Application.IntegrationEvents.EventsHandler
 {

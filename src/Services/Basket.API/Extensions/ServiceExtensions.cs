@@ -4,11 +4,9 @@ using Basket.API.Repositories.Interfaces;
 using Contracts.Common.Interfaces;
 using EventBus.Messages.IntegrationEvents.Interfaces;
 using Infrastructure.Common;
-using Infrastructure.Configurations;
 using Infrastructure.Extensions;
 using Inventory.Grpc.Client;
 using MassTransit;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Shared.Configurations;
 
@@ -36,7 +34,7 @@ namespace Basket.API.Extensions
         public static void ConfigureRedis(this IServiceCollection services, IConfiguration configuration)
         {
             var settings = services.GetOptions<CacheSettings>("CacheSettings");
-            if(string.IsNullOrEmpty(settings.ConnectionString))
+            if (string.IsNullOrEmpty(settings.ConnectionString))
             {
                 throw new ArgumentException("Redis Conection string is not configured.");
             }
@@ -51,7 +49,8 @@ namespace Basket.API.Extensions
         public static void ConfigureMassTransit(this IServiceCollection services)
         {
             var settings = services.GetOptions<EventBusSettings>("EventBusSettings");
-            if(settings == null || string.IsNullOrEmpty(settings.HostAddress)) {
+            if (settings == null || string.IsNullOrEmpty(settings.HostAddress))
+            {
                 throw new ArgumentNullException("EventBusSettings is not configures.");
             }
 
@@ -72,7 +71,7 @@ namespace Basket.API.Extensions
         public static IServiceCollection ConfigureGrpcServices(this IServiceCollection services)
         {
             var settings = services.GetOptions<GrpcSettings>(nameof(GrpcSettings));
-            services.AddGrpcClient<StockProtoService.StockProtoServiceClient>(x=>x.Address = new Uri(settings.StockUrl));
+            services.AddGrpcClient<StockProtoService.StockProtoServiceClient>(x => x.Address = new Uri(settings.StockUrl));
             services.AddScoped<StockItemGrpcService>();
             return services;
         }

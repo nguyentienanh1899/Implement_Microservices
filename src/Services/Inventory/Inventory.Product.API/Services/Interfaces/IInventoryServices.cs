@@ -2,7 +2,6 @@
 using Infrastructure.Common.Models;
 using Inventory.Product.API.Entities;
 using Shared.DTOs.Inventory;
-using Shared.SeedWork;
 
 namespace Inventory.Product.API.Services.Interfaces
 {

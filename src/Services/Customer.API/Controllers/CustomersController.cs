@@ -1,12 +1,8 @@
-﻿using Customer.API.Repositories.Interfaces;
-using Customer.API.Services.Interfaces;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Shared.DTOs.Customer;
+﻿using Customer.API.Services.Interfaces;
 
 namespace Customer.API.Controllers
 {
-    public static class CustomersController 
+    public static class CustomersController
     {
         public static void MapCustomersAPI(this WebApplication app)
         {

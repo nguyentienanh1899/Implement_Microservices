@@ -1,14 +1,8 @@
-﻿using Contracts;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Contracts.Common.Events;
 using Ordering.Domain.Enums;
-using Contracts.Common.Events;
 using Ordering.Domain.OrderAggregate.Events;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Ordering.Domain.Entities
 {

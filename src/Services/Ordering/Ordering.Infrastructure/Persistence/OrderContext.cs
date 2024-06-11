@@ -1,18 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Microsoft.EntityFrameworkCore;
-using Ordering.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using MediatR;
-using Infrastructure.Extensions;
-using Serilog;
-using Contracts.Common.Events;
+﻿using Contracts.Common.Events;
 using Contracts.Common.Interfaces;
 using Contracts.Domains.Interfaces;
+using Infrastructure.Extensions;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Ordering.Domain.Entities;
+using Serilog;
+using System.Reflection;
 
 namespace Ordering.Infrastructure.Persistence
 {

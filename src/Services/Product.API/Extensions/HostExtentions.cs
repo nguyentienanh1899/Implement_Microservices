@@ -22,7 +22,7 @@ namespace Product.API.Extensions
 
                     logger.LogInformation("Migrated mysql database");
                     InvokeSeeder(seeder, context, services);
-                    
+
                 }
                 catch (Exception ex)
                 {
@@ -35,7 +35,7 @@ namespace Product.API.Extensions
 
         private static void InvokeSeeder<TContext>(Action<TContext, IServiceProvider> seeder, TContext context, IServiceProvider services) where TContext : DbContext
         {
-            seeder(context,services);
+            seeder(context, services);
         }
 
         /// <summary>

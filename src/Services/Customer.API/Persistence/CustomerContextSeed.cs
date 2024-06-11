@@ -33,7 +33,7 @@ namespace Customer.API.Persistence
 
         public static async Task CreateCustomer(CustomerContext customerContext, Entities.Customer newCustomer)
         {
-            var customer = await customerContext.Customers.SingleOrDefaultAsync(x=>x.UserName.Equals(newCustomer.UserName) || x.EmailAddress.Equals(newCustomer.EmailAddress));
+            var customer = await customerContext.Customers.SingleOrDefaultAsync(x => x.UserName.Equals(newCustomer.UserName) || x.EmailAddress.Equals(newCustomer.EmailAddress));
             if (customer == null)
             {
                 await customerContext.Customers.AddAsync(newCustomer);

@@ -6,7 +6,7 @@ namespace Basket.API.Controllers.HomeController
     {
         public IActionResult Index()
         {
-            return Redirect("~/swagger");        
+            return Redirect("~/swagger");
         }
     }
 }

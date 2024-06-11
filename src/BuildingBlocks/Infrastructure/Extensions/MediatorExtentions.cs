@@ -1,8 +1,6 @@
 ﻿using Contracts.Common.Events;
-using Contracts.Common.Interfaces;
 using Infrastructure.Common;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 namespace Infrastructure.Extensions

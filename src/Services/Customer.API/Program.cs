@@ -9,8 +9,6 @@ using Customer.API.Services.Interfaces;
 using Infrastructure.Common.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
-using Shared.DTOs.Customer;
-using System.Net.WebSockets;
 
 
 Log.Logger = new LoggerConfiguration().WriteTo.Console().CreateBootstrapLogger();
@@ -20,6 +18,7 @@ Log.Information($"Start {builder.Environment.ApplicationName} up");
 
 try
 {
+    builder.Host.UseSerilog(Serilogger.Configure);
     // Add services to the container.
 
     builder.Services.AddControllers();

@@ -1,9 +1,4 @@
 ﻿using Contracts.Common.Events;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ordering.Domain.OrderAggregate.Events
 {
@@ -16,7 +11,7 @@ namespace Ordering.Domain.OrderAggregate.Events
         public decimal TotalPrice { get; private set; }
         public string InvoiceAddress { get; private set; }
         public string ShippingAddress { get; private set; }
-        public string FullName {  get; set; }
+        public string FullName { get; set; }
 
         public OrderCreatedEvent(long id, string userName, string documentNo, decimal totalPrice, string emailAddress, string invoiceAddress, string shippingAddress, string fullName)
         {
