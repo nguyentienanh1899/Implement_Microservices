@@ -34,7 +34,7 @@ namespace Infrastructure.Common.Repositories
             return items;
         }
 
-        public async Task<T?> GetByIdAsync(K id) => await FindByCondition(x => x.Equals(id)).FirstOrDefaultAsync();
+        public async Task<T?> GetByIdAsync(K id) => await FindByCondition(entity => EF.Property<K>(entity, "Id").Equals(id)).FirstOrDefaultAsync();
 
         public async Task<T?> GetByIdAsync(K id, params Expression<Func<T, object>>[] includeProperties)
             => await FindByCondition(x => x.Equals(id), trackChanges: false, includeProperties).FirstOrDefaultAsync();
