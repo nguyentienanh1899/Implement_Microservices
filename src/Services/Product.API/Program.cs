@@ -13,6 +13,8 @@ try
     builder.Host.UseSerilog(Serilogger.Configure);
     builder.Host.AddAppConfigurations();
 
+    builder.Services.AddConfigurationSettings(builder.Configuration);
+
     // Add services to the container
     builder.Services.AddInfrastructure(builder.Configuration);
 
