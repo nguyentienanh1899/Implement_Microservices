@@ -47,7 +47,7 @@ namespace Product.API.Extensions
         internal static IServiceCollection AddJwtAuthentication(this IServiceCollection services)
         {
             var settings = services.GetOptions<JwtSettings>(nameof(JwtSettings));
-            if(settings != null || string.IsNullOrEmpty(settings.Key)) 
+            if(settings == null || string.IsNullOrEmpty(settings.Key)) 
             {
                 throw new ArgumentNullException($"{nameof(JwtSettings)} is not configured properly");
             }
@@ -99,8 +99,7 @@ namespace Product.API.Extensions
         {
             return services.AddScoped(typeof(IRepositoryBase<,,>), typeof(RepositoryBase<,,>))
                 .AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>))
-                .AddScoped<IProductRepository, ProductRepository>()
-                .AddTransient<ITokenService, TokenService>();
+                .AddScoped<IProductRepository, ProductRepository>();
         }
 
     }

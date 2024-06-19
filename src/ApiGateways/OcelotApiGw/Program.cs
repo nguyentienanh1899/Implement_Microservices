@@ -36,10 +36,17 @@ try
     app.UseCors("CorsPolicy");
 
     app.UseMiddleware<ErrorWrappingMiddleware>();
-
+    app.UseAuthentication();
     //app.UseHttpsRedirection();
 
     app.UseAuthorization();
+    app.UseEndpoints(endpoints =>
+    {
+        endpoints.MapGet("/", async context =>
+        {
+            await context.Response.WriteAsync($"{builder.Environment.ApplicationName} v1");
+        });
+    });
 
     app.MapControllers();
 
