@@ -55,8 +55,8 @@ namespace Product.API.Extensions
             var siginKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(settings.Key));
             var tokenValidationParameters = new TokenValidationParameters
             {
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = siginKey,
+                ValidateIssuerSigningKey = true, //Enable secret key authentication
+                IssuerSigningKey = siginKey, //The secret key is used for authentication
                 ValidateIssuer = false,
                 ValidateAudience = false,
                 ValidateLifetime = false,

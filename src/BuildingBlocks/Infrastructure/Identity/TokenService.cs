@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -33,10 +34,17 @@ namespace Infrastructure.Identity
             return new SigningCredentials(new SymmetricSecurityKey(secret), SecurityAlgorithms.HmacSha256);
         }
 
+        
         private string GenerateEncryptedToken(SigningCredentials signingCredentials)
         {
+            //Quickly configure basic Claim with hard code
+            var claims = new[]
+            {
+                new Claim("Role", "Admin")
+            };
             var token = new JwtSecurityToken(
-                //expires: DateTime.Now.AddMinutes(30)
+                claims: claims,
+                expires: DateTime.Now.AddMinutes(30),
                 signingCredentials: signingCredentials
                 );
             var tokenHandler = new JwtSecurityTokenHandler();

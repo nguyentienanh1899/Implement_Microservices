@@ -49,7 +49,7 @@ namespace OcelotApiGw.Extensions
             {
                 o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(x =>
+            }).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, x =>
             {
                 x.SaveToken = true;
                 x.RequireHttpsMetadata = false;

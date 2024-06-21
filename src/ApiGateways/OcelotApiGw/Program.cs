@@ -36,6 +36,7 @@ try
     app.UseCors("CorsPolicy");
 
     app.UseMiddleware<ErrorWrappingMiddleware>();
+    // Enable authentication middleware
     app.UseAuthentication();
     //app.UseHttpsRedirection();
 
