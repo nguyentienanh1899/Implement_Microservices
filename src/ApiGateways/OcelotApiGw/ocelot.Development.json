@@ -33,7 +33,14 @@
           "Host": "localhost",
           "Port": 5002
         }
-      ]
+      ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [],
+        "Period": "10s",
+        "EnableRateLimiting": true,
+        "PeriodTimespan": 10,
+        "Limit": 1
+      }
     },
 
     {
@@ -75,11 +82,11 @@
         }
       ],
       "RateLimitOptions": {
-        "ClientWhitelist": [], //The client in this array will not be affected by the rate limit config
+        "ClientWhitelist": [],
+        "Period": "10s",
         "EnableRateLimiting": true,
-        "Period": "1s", //Time rate limit: 2s, 5m, 1h, 1d
-        "PeriodTimespan": 1, //retry after a certain number of time
-        "Limit": 1 //the maximum number of request that a client can make in a defined period
+        "PeriodTimespan": 10,
+        "Limit": 1
       }
     },
 
