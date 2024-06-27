@@ -75,9 +75,9 @@
         }
       ],
       "RateLimitOptions": {
-        "ClientWhiteList": [], //The client in this array will not be affected by the rate limit config
+        "ClientWhitelist": [], //The client in this array will not be affected by the rate limit config
         "EnableRateLimiting": true,
-        "Period": "2s", //Time rate limit: 2s, 5m, 1h, 1d
+        "Period": "1s", //Time rate limit: 2s, 5m, 1h, 1d
         "PeriodTimespan": 1, //retry after a certain number of time
         "Limit": 1 //the maximum number of request that a client can make in a defined period
       }
