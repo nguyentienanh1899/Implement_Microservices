@@ -40,7 +40,7 @@ namespace Product.API.Extensions
             services.AddInfrastructureServices();
             // auto mapper
             services.AddAutoMapper(x => x.AddProfile(new MappingProfile()));
-            services.AddJwtAuthentication();
+            //services.AddJwtAuthentication();
             return services;
         }
 

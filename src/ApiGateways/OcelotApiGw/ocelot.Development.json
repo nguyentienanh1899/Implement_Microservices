@@ -17,16 +17,17 @@
           "Host": "localhost",
           "Port": 5003
         }
-      ]
+      ],
+      "SwaggerKey": "customer"
     },
 
     // Product API: http://localhost:5002/api/products
     {
-      "UpstreamPathTemplate": "/products/{any}",
+      "UpstreamPathTemplate": "/products/{id}",
       "UpstreamHttpMethod": [
         "GET"
       ],
-      "DownstreamPathTemplate": "/api/products/{any}",
+      "DownstreamPathTemplate": "/api/products/{id}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -45,16 +46,17 @@
         "ExceptionsAllowedBeforeBreaking": 2, //If the service does not response for 2 seconds, it will throw a timeout exception.
         "DurationOfBreak": 1000, //The amount of time the circuit breaker will "trip" after detecting an error.
         "TimeoutValue": 5000 //Maximum wait time for a request before it is considered an error.
-      }
+      },
+      "SwaggerKey": "product"
     },
 
     {
-      "UpstreamPathTemplate": "/products/{any}",
+      "UpstreamPathTemplate": "/products/{id}",
       "UpstreamHttpMethod": [
         "PUT",
         "DELETE"
       ],
-      "DownstreamPathTemplate": "/api/products/{any}",
+      "DownstreamPathTemplate": "/api/products/{id}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -62,14 +64,15 @@
           "Port": 5002
         }
       ],
+      "SwaggerKey": "product"
       //The authentication scheme (Multi Tenant - With 1 tenant -> Each routing has its own scope)
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      },
-      "RouteClaimsRequirement": {
-        "Role": "Admin"
-      }
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer",
+      //  "AllowedScopes": []
+      //},
+      //"RouteClaimsRequirement": {
+      //  "Role": "Admin"
+      //}
     },
 
     {
@@ -92,22 +95,24 @@
         "EnableRateLimiting": true,
         "PeriodTimespan": 10, // Retry after a certain number of time
         "Limit": 1 // The maximum number of request that a client can make in a defined period
-      }
+      },
+      "SwaggerKey": "product"
     },
 
     {
-      "UpstreamPathTemplate": "/products/getproductbyno/{any}",
+      "UpstreamPathTemplate": "/products/getproductbyno/{productNo}",
       "UpstreamHttpMethod": [
         "GET"
       ],
-      "DownstreamPathTemplate": "/api/products/getproductbyno/{any}",
+      "DownstreamPathTemplate": "/api/products/getproductbyno/{productNo}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
           "Port": 5002
         }
-      ]
+      ],
+      "SwaggerKey": "product"
     },
 
     // Basket API: http://localhost:5004/api/baskets
@@ -124,7 +129,8 @@
           "Host": "localhost",
           "Port": 5004
         }
-      ]
+      ],
+      "SwaggerKey": "basket"
     },
 
     {
@@ -139,7 +145,8 @@
           "Host": "localhost",
           "Port": 5004
         }
-      ]
+      ],
+      "SwaggerKey": "basket"
     },
 
     {
@@ -154,7 +161,8 @@
           "Host": "localhost",
           "Port": 5004
         }
-      ]
+      ],
+      "SwaggerKey": "basket"
     },
 
     // Order API: http://localhost:5005/api/{version}/orders
@@ -172,7 +180,8 @@
           "Host": "localhost",
           "Port": 5005
         }
-      ]
+      ],
+      "SwaggerKey": "order"
     },
 
     {
@@ -187,7 +196,8 @@
           "Host": "localhost",
           "Port": 5005
         }
-      ]
+      ],
+      "SwaggerKey": "order"
     },
 
     //Inventory API: http://localhost:5006/api/inventory
@@ -203,7 +213,8 @@
           "Host": "localhost",
           "Port": 5006
         }
-      ]
+      ],
+      "SwaggerKey": "inventory"
     },
 
     {
@@ -218,7 +229,8 @@
           "Host": "localhost",
           "Port": 5006
         }
-      ]
+      ],
+      "SwaggerKey": "inventory"
     },
 
     {
@@ -234,7 +246,8 @@
           "Host": "localhost",
           "Port": 5006
         }
-      ]
+      ],
+      "SwaggerKey": "inventory"
     },
 
     {
@@ -249,7 +262,62 @@
           "Host": "localhost",
           "Port": 5006
         }
+      ],
+      "SwaggerKey": "inventory"
+    }
+  ],
+
+  "SwaggerEndPoints": [
+    {
+      "Key": "customer",
+      "Config": [
+        {
+          "Name": "Customer API",
+          "Version": "v1",
+          "Url": "http://localhost:5003/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "product",
+      "Config": [
+        {
+          "Name": "Product API",
+          "Version": "v1",
+          "Url": "http://localhost:5002/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "basket",
+      "Config": [
+        {
+          "Name": "Basket API",
+          "Version": "v1",
+          "Url": "http://localhost:5004/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "order",
+      "Config": [
+        {
+          "Name": "Order API",
+          "Version": "v1",
+          "Url": "http://localhost:5005/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "inventory",
+      "Config": [
+        {
+          "Name": "Inventory API",
+          "Version": "v1",
+          "Url": "http://localhost:5006/swagger/v1/swagger.json"
+        }
       ]
     }
+
   ]
 }

@@ -27,10 +27,7 @@ try
     if (app.Environment.IsDevelopment())
     {
         app.UseSwagger();
-        app.UseSwaggerUI(s =>
-        {
-            s.SwaggerEndpoint("/swagger/v1/swagger.json", $"{builder.Environment.ApplicationName} v1");
-        });
+        app.UseSwaggerForOcelotUI();
     }
 
     app.UseRouting();
@@ -38,17 +35,20 @@ try
     app.UseMiddleware<ErrorWrappingMiddleware>();
 
     // Enable authentication middleware
-    app.UseAuthentication();
+    //app.UseAuthentication();
     //app.UseHttpsRedirection();
-    app.UseAuthorization();
+    //app.UseAuthorization();
     app.UseEndpoints(endpoints =>
     {
-        endpoints.MapGet("/", async context =>
+        endpoints.MapGet("/", context =>
         {
-            await context.Response.WriteAsync($"{builder.Environment.ApplicationName} v1");
+            //await context.Response.WriteAsync($"{builder.Environment.ApplicationName} v1");
+            context.Response.Redirect("swagger/index.html");
+            return Task.CompletedTask;
         });
     });
 
+    
     app.MapControllers();
 
     // Use await because Ocelot execute tasks
