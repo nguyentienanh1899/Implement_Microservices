@@ -93,7 +93,6 @@
     {
       "UpstreamPathTemplate": "/products",
       "UpstreamHttpMethod": [
-        "GET",
         "POST"
       ],
       "DownstreamPathTemplate": "/api/products",
@@ -112,6 +111,33 @@
         "Limit": 1 // The maximum number of request that a client can make in a defined period
       },
       "SwaggerKey": "product"
+    },
+
+    {
+      "UpstreamPathTemplate": "/products",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "DownstreamPathTemplate": "/api/products",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5002
+        }
+      ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [], // The client in this array will not be affected by the rate limit config
+        "Period": "10s", // Time rate limit: 2s, 5m, 1h, 1d
+        "EnableRateLimiting": true,
+        "PeriodTimespan": 10, // Retry after a certain number of time
+        "Limit": 1 // The maximum number of request that a client can make in a defined period
+      },
+      "SwaggerKey": "product",
+      "FileCacheOptions": {
+        "TtlSeconds": 15,
+        "Region": "products"
+      }
     },
 
     {
@@ -228,6 +254,7 @@
       ],
       "SwaggerKey": "order"
     },
+
     {
       "UpstreamPathTemplate": "/{version}/orders",
       "UpstreamHttpMethod": [
