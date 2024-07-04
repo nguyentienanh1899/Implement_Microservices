@@ -1,0 +1,394 @@
+{
+  "GlobalConfiguration": {
+    "BaseUrl": "http://apigw.ocelot" //Port API Gate way
+  },
+  "Routes": [
+    // Customer API: 
+    {
+      "UpstreamPathTemplate": "/customers/{username}", // Route request from client
+      "UpstreamHttpMethod": [
+        "GET"
+      ], // Method
+      "DownstreamPathTemplate": "/api/customers/{username}", // Route request send to backend
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        //List port API listen
+        {
+          "Host": "host.docker.internal",
+          "Port": 6003
+        }
+      ],
+      "SwaggerKey": "customer"
+    },
+
+    // Product API: 
+    {
+      "UpstreamPathTemplate": "/products/{id}",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "DownstreamPathTemplate": "/api/products/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 6002
+        }
+      ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [],
+        "Period": "10s",
+        "EnableRateLimiting": true,
+        "PeriodTimespan": 10,
+        "Limit": 1
+      },
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 2, //If the service does not response for 2 seconds, it will throw a timeout exception.
+        "DurationOfBreak": 1000, //The amount of time the circuit breaker will "trip" after detecting an error.
+        "TimeoutValue": 5000 //Maximum wait time for a request before it is considered an error.
+      },
+      "SwaggerKey": "product"
+    },
+
+    {
+      "UpstreamPathTemplate": "/products/{id}",
+      "UpstreamHttpMethod": [
+        "PUT"
+      ],
+      "DownstreamPathTemplate": "/api/products/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 6002
+        }
+      ],
+      "SwaggerKey": "product"
+      //The authentication scheme (Multi Tenant - With 1 tenant -> Each routing has its own scope)
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer",
+      //  "AllowedScopes": []
+      //},
+      //"RouteClaimsRequirement": {
+      //  "Role": "Admin"
+      //}
+    },
+
+    {
+      "UpstreamPathTemplate": "/products/id:long",
+      "UpstreamHttpMethod": [
+        "DELETE"
+      ],
+      "DownstreamPathTemplate": "/api/products/id:long",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 6002
+        }
+      ],
+      "SwaggerKey": "product"
+    },
+
+    {
+      "UpstreamPathTemplate": "/products",
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
+      "DownstreamPathTemplate": "/api/products",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 6002
+        }
+      ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [], // The client in this array will not be affected by the rate limit config
+        "Period": "10s", // Time rate limit: 2s, 5m, 1h, 1d
+        "EnableRateLimiting": true,
+        "PeriodTimespan": 10, // Retry after a certain number of time
+        "Limit": 1 // The maximum number of request that a client can make in a defined period
+      },
+      "SwaggerKey": "product"
+    },
+
+    {
+      "UpstreamPathTemplate": "/products",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "DownstreamPathTemplate": "/api/products",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 6002
+        }
+      ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [], // The client in this array will not be affected by the rate limit config
+        "Period": "10s", // Time rate limit: 2s, 5m, 1h, 1d
+        "EnableRateLimiting": true,
+        "PeriodTimespan": 10, // Retry after a certain number of time
+        "Limit": 1 // The maximum number of request that a client can make in a defined period
+      },
+      "SwaggerKey": "product",
+      "FileCacheOptions": {
+        "TtlSeconds": 15,
+        "Region": "products"
+      }
+    },
+
+    {
+      "UpstreamPathTemplate": "/products/getproductbyno/{productNo}",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "DownstreamPathTemplate": "/api/products/getproductbyno/{productNo}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 6002
+        }
+      ],
+      "SwaggerKey": "product"
+    },
+
+    // Basket API: 
+    {
+      "UpstreamPathTemplate": "/baskets/{username}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "DELETE"
+      ],
+      "DownstreamPathTemplate": "/api/baskets/{username}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 6004
+        }
+      ],
+      "SwaggerKey": "basket"
+    },
+
+    {
+      "UpstreamPathTemplate": "/baskets",
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
+      "DownstreamPathTemplate": "/api/baskets",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 6004
+        }
+      ],
+      "SwaggerKey": "basket"
+    },
+
+    {
+      "UpstreamPathTemplate": "/baskets/checkout",
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
+      "DownstreamPathTemplate": "/api/baskets/checkout",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 6004
+        }
+      ],
+      "SwaggerKey": "basket"
+    },
+
+    // Order API: 
+    {
+      "UpstreamPathTemplate": "/{version}/orders/username",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "DownstreamPathTemplate": "/api/{version}/orders/username",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 6005
+        }
+      ],
+      "SwaggerKey": "order"
+    },
+
+    {
+      "UpstreamPathTemplate": "/{version}/orders",
+      "UpstreamHttpMethod": [
+        "PUT"
+      ],
+      "DownstreamPathTemplate": "/api/{version}/orders",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 6005
+        }
+      ],
+      "SwaggerKey": "order"
+    },
+
+    {
+      "UpstreamPathTemplate": "/{version}/orders/{id}",
+      "UpstreamHttpMethod": [
+        "DELETE"
+      ],
+      "DownstreamPathTemplate": "/api/{version}/orders/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 6005
+        }
+      ],
+      "SwaggerKey": "order"
+    },
+
+    {
+      "UpstreamPathTemplate": "/{version}/orders",
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
+      "DownstreamPathTemplate": "/api/{version}/orders",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 6005
+        }
+      ],
+      "SwaggerKey": "order"
+    },
+
+    //Inventory API: 
+    {
+      "UpstreamPathTemplate": "/inventory/items/{itemNo}",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "DownstreamPathTemplate": "/api/inventory/items/{itemNo}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 6006
+        }
+      ],
+      "SwaggerKey": "inventory"
+    },
+
+    {
+      "UpstreamPathTemplate": "/inventory/items/{itemNo}/paging",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "DownstreamPathTemplate": "/api/inventory/items/{itemNo}/paging",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 6006
+        }
+      ],
+      "SwaggerKey": "inventory"
+    },
+
+    {
+      "UpstreamPathTemplate": "/inventory/{id}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "DELETE"
+      ],
+      "DownstreamPathTemplate": "/api/inventory/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 6006
+        }
+      ],
+      "SwaggerKey": "inventory"
+    },
+
+    {
+      "UpstreamPathTemplate": "/inventory/purchase/{itemNo}",
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
+      "DownstreamPathTemplate": "/api/inventory/purchase/{itemNo}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 6006
+        }
+      ],
+      "SwaggerKey": "inventory"
+    }
+  ],
+
+  "SwaggerEndPoints": [
+    {
+      "Key": "customer",
+      "Config": [
+        {
+          "Name": "Customer API",
+          "Version": "v1",
+          "Url": "http://customer.api:6003/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "product",
+      "Config": [
+        {
+          "Name": "Product API",
+          "Version": "v1",
+          "Url": "http://product.api:6002/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "basket",
+      "Config": [
+        {
+          "Name": "Basket API",
+          "Version": "v1",
+          "Url": "http://basket.api:6004/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "order",
+      "Config": [
+        {
+          "Name": "Order API",
+          "Version": "v1",
+          "Url": "http://order.api:6005/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "inventory",
+      "Config": [
+        {
+          "Name": "Inventory API",
+          "Version": "v1",
+          "Url": "http://inventory.product.api:6006/swagger/v1/swagger.json"
+        }
+      ]
+    }
+
+  ]
+}

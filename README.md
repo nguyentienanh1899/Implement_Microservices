@@ -46,3 +46,12 @@ Query Tool run command:
 	1. Create App Password in google account (Enable 2 step authentication in Google account)
 	2. Configure: SMTP setting with password app created.
 	3. Install:  Mailkit - using client mail.
+
+## Product.API
+- Install MySql + My SqlWorkBench.
+- Run Mirgration create database 
+- ProductContextSeed: Create sample data and insert into the database. Sample data is automatically added when running the program
+
+## Basket.API
+
+## Inventory API
