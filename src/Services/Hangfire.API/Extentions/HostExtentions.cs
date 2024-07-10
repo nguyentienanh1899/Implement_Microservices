@@ -1,5 +1,6 @@
 ﻿using Common.Logging;
 using Serilog;
+using Shared.Configurations;
 
 namespace Hangfire.API.Extentions
 {
@@ -14,6 +15,25 @@ namespace Hangfire.API.Extentions
                     .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
                     .AddEnvironmentVariables();
             }).UseSerilog(Serilogger.Configure);
+        }
+
+        internal static IApplicationBuilder UseHangfireDashboard(this IApplicationBuilder app, IConfiguration configuration) 
+        {
+            var configDashboard = configuration.GetSection("HangFireSettings:Dashboard").Get<DashboardOptions>();
+            var hangfireSettings = configuration.GetSection("HangFireSettings").Get<HangFireSettings>();
+
+            var hangfireRoute = hangfireSettings?.Route;
+
+            app.UseHangfireDashboard(hangfireRoute, new DashboardOptions
+            {
+                //Authorization = 
+                DashboardTitle = configDashboard.DashboardTitle,
+                StatsPollingInterval = configDashboard.StatsPollingInterval,
+                AppPath = configDashboard.AppPath,
+                IgnoreAntiforgeryToken = true,
+            });
+
+            return app;
         }
     }
 }
