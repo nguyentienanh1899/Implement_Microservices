@@ -23,13 +23,8 @@ try
 
     var app = builder.Build();
 
-    // Configure the HTTP request pipeline.
-    if (app.Environment.IsDevelopment())
-    {
-        app.UseSwagger();
-        app.UseSwaggerForOcelotUI();
-    }
-
+    app.UseSwagger();
+    app.UseSwaggerForOcelotUI();
     app.UseRouting();
     app.UseCors("CorsPolicy");
     app.UseMiddleware<ErrorWrappingMiddleware>();

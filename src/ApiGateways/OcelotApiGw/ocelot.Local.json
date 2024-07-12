@@ -156,11 +156,26 @@
       "SwaggerKey": "product"
     },
 
-    // Basket API: 
+    // Basket API:
     {
       "UpstreamPathTemplate": "/baskets/{username}",
       "UpstreamHttpMethod": [
-        "GET",
+        "GET"
+      ],
+      "DownstreamPathTemplate": "/api/baskets/{username}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 6004
+        }
+      ],
+      "SwaggerKey": "basket"
+    },
+
+    {
+      "UpstreamPathTemplate": "/baskets/{username}",
+      "UpstreamHttpMethod": [
         "DELETE"
       ],
       "DownstreamPathTemplate": "/api/baskets/{username}",
@@ -307,7 +322,22 @@
     {
       "UpstreamPathTemplate": "/inventory/{id}",
       "UpstreamHttpMethod": [
-        "GET",
+        "GET"
+      ],
+      "DownstreamPathTemplate": "/api/inventory/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": 6006
+        }
+      ],
+      "SwaggerKey": "inventory"
+    },
+
+    {
+      "UpstreamPathTemplate": "/inventory/{id}",
+      "UpstreamHttpMethod": [
         "DELETE"
       ],
       "DownstreamPathTemplate": "/api/inventory/{id}",
@@ -349,6 +379,7 @@
         }
       ]
     },
+
     {
       "Key": "product",
       "Config": [
@@ -359,6 +390,7 @@
         }
       ]
     },
+
     {
       "Key": "basket",
       "Config": [
@@ -369,16 +401,18 @@
         }
       ]
     },
+
     {
       "Key": "order",
       "Config": [
         {
           "Name": "Order API",
           "Version": "v1",
-          "Url": "http://order.api:6005/swagger/v1/swagger.json"
+          "Url": "http://ordering.api:6005/swagger/v1/swagger.json"
         }
       ]
     },
+
     {
       "Key": "inventory",
       "Config": [
@@ -389,6 +423,5 @@
         }
       ]
     }
-
   ]
 }
