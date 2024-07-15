@@ -375,7 +375,7 @@
         {
           "Name": "Customer API",
           "Version": "v1",
-          "Url": "http://customer.api:6003/swagger/v1/swagger.json"
+          "Url": "http://customer.api:80/swagger/v1/swagger.json"
         }
       ]
     },
@@ -386,7 +386,7 @@
         {
           "Name": "Product API",
           "Version": "v1",
-          "Url": "http://product.api:6002/swagger/v1/swagger.json"
+          "Url": "http://product.api:80/swagger/v1/swagger.json"
         }
       ]
     },
@@ -397,7 +397,7 @@
         {
           "Name": "Basket API",
           "Version": "v1",
-          "Url": "http://basket.api:6004/swagger/v1/swagger.json"
+          "Url": "http://basket.api:80/swagger/v1/swagger.json"
         }
       ]
     },
@@ -408,7 +408,7 @@
         {
           "Name": "Order API",
           "Version": "v1",
-          "Url": "http://ordering.api:6005/swagger/v1/swagger.json"
+          "Url": "http://ordering.api:80/swagger/v1/swagger.json"
         }
       ]
     },
@@ -419,7 +419,7 @@
         {
           "Name": "Inventory API",
           "Version": "v1",
-          "Url": "http://inventory.product.api:6006/swagger/v1/swagger.json"
+          "Url": "http://inventory.product.api:80/swagger/v1/swagger.json"
         }
       ]
     }
