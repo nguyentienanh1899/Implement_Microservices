@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Serilog;
 using Shared.SeedWork;
-using System.ComponentModel.DataAnnotations;
 
 namespace Infrastructure.Middlewares
 {

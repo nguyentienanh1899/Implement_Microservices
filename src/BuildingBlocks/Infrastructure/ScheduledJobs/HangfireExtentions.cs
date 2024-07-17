@@ -18,9 +18,9 @@ namespace Infrastructure.ScheduledJobs
         public static IServiceCollection AddHangfireServiceCustom(this IServiceCollection services)
         {
             var settings = services.GetOptions<HangFireSettings>("HangFireSettings");
-            if(settings == null 
+            if (settings == null
                 || settings.Storage == null
-                || string.IsNullOrEmpty(settings.Storage.ConnectionString)) 
+                || string.IsNullOrEmpty(settings.Storage.ConnectionString))
             {
                 throw new Exception("HangFireSettings is not configured properly!");
             }
@@ -35,18 +35,19 @@ namespace Infrastructure.ScheduledJobs
 
         private static IServiceCollection ConfigureHangfireServices(this IServiceCollection services, HangFireSettings hangFireSetting)
         {
-            if(string.IsNullOrEmpty(hangFireSetting.Storage.DBProvider))
+            if (string.IsNullOrEmpty(hangFireSetting.Storage.DBProvider))
             {
                 throw new Exception("HangFire DBProvider is not configured.");
             }
 
-            switch(hangFireSetting.Storage.DBProvider.ToLower())
+            switch (hangFireSetting.Storage.DBProvider.ToLower())
             {
                 case "mongodb":
                     var mongoUrlBuilder = new MongoUrlBuilder(hangFireSetting.Storage.ConnectionString);
                     var mongoClientSettings = MongoClientSettings.FromUrl(new MongoUrl(hangFireSetting.Storage.ConnectionString));
 
-                    mongoClientSettings.SslSettings = new SslSettings{
+                    mongoClientSettings.SslSettings = new SslSettings
+                    {
                         EnabledSslProtocols = SslProtocols.Tls12,
                     };
 
@@ -79,7 +80,7 @@ namespace Infrastructure.ScheduledJobs
                         };
                         config.UseSerializerSettings(jsonSettings);
                     });
-                    
+
                     services.AddHangfireConsoleExtensions();
                     break;
                 case "postgresql":

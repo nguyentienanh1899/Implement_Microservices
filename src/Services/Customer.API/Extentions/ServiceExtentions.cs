@@ -1,19 +1,19 @@
-﻿using Customer.API.Persistence;
-using Customer.API.Repositories.Interfaces;
+﻿using Contracts.Common.Interfaces;
+using Customer.API.Persistence;
 using Customer.API.Repositories;
+using Customer.API.Repositories.Interfaces;
+using Customer.API.Services;
+using Customer.API.Services.Interfaces;
+using Infrastructure.Common.Repositories;
 using Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Shared.Configurations;
-using Contracts.Common.Interfaces;
-using Customer.API.Services.Interfaces;
-using Customer.API.Services;
-using Infrastructure.Common.Repositories;
 
 namespace Customer.API.Extentions
 {
     public static class ServiceExtentions
     {
-        public static IServiceCollection AddConfigurationSettings(this IServiceCollection services, IConfiguration configuration) 
+        public static IServiceCollection AddConfigurationSettings(this IServiceCollection services, IConfiguration configuration)
         {
             var databaseSettings = configuration.GetSection(nameof(DatabaseSettings)).Get<DatabaseSettings>();
             services.AddSingleton(databaseSettings);
@@ -26,8 +26,8 @@ namespace Customer.API.Extentions
 
         public static void ConfigureCustomerContext(this IServiceCollection services)
         {
-            var databaseSettings = services.GetOptions<DatabaseSettings>(nameof(DatabaseSettings)); 
-            if( databaseSettings == null || string.IsNullOrEmpty(databaseSettings.ConnectionString))
+            var databaseSettings = services.GetOptions<DatabaseSettings>(nameof(DatabaseSettings));
+            if (databaseSettings == null || string.IsNullOrEmpty(databaseSettings.ConnectionString))
             {
                 throw new ArgumentNullException("Connection string is not configured");
             }

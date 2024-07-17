@@ -1,10 +1,7 @@
-﻿using Common.Logging;
-using Contracts.Common.Interfaces;
-using Contracts.Identity;
+﻿using Contracts.Common.Interfaces;
 using Infrastructure.Common;
 using Infrastructure.Common.Repositories;
 using Infrastructure.Extensions;
-using Infrastructure.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -47,7 +44,7 @@ namespace Product.API.Extensions
         internal static IServiceCollection AddJwtAuthentication(this IServiceCollection services)
         {
             var settings = services.GetOptions<JwtSettings>(nameof(JwtSettings));
-            if(settings == null || string.IsNullOrEmpty(settings.Key)) 
+            if (settings == null || string.IsNullOrEmpty(settings.Key))
             {
                 throw new ArgumentNullException($"{nameof(JwtSettings)} is not configured properly");
             }

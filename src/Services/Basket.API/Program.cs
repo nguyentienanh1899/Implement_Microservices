@@ -1,6 +1,5 @@
 using Basket.API.Extensions;
 using Basket.API.Mapping;
-using Common.Logging;
 using Serilog;
 
 

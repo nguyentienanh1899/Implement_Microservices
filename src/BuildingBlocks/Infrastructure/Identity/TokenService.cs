@@ -2,13 +2,9 @@
 using Microsoft.IdentityModel.Tokens;
 using Shared.Configurations;
 using Shared.DTOs.Identity;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Identity
 {
@@ -17,7 +13,7 @@ namespace Infrastructure.Identity
         private readonly JwtSettings _jwtSettings;
         public TokenService(JwtSettings jwtSettings)
         {
-           _jwtSettings = jwtSettings;
+            _jwtSettings = jwtSettings;
         }
         public TokenRespone GetToken(TokenRequest request)
         {
@@ -34,7 +30,7 @@ namespace Infrastructure.Identity
             return new SigningCredentials(new SymmetricSecurityKey(secret), SecurityAlgorithms.HmacSha256);
         }
 
-        
+
         private string GenerateEncryptedToken(SigningCredentials signingCredentials)
         {
             //Quickly configure basic Claim with hard code

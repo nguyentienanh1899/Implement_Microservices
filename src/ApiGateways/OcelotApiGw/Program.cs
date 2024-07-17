@@ -1,4 +1,3 @@
-using Common.Logging;
 using Infrastructure.Middlewares;
 using Ocelot.Middleware;
 using OcelotApiGw.Extensions;
@@ -43,7 +42,7 @@ try
         });
     });
 
-    
+
     app.MapControllers();
 
     // Use await because Ocelot execute tasks

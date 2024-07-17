@@ -1,4 +1,3 @@
-using Common.Logging;
 using Hangfire.API.Extentions;
 using Infrastructure.ScheduledJobs;
 using Serilog;

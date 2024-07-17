@@ -1,4 +1,3 @@
-using Common.Logging;
 using Ordering.API.Extensions;
 using Ordering.Application;
 using Ordering.Infrastructure;

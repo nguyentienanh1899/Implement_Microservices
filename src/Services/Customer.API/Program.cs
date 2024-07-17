@@ -1,16 +1,9 @@
 using Common.Logging;
-using Contracts.Common.Interfaces;
 using Customer.API.Controllers;
 using Customer.API.Extentions;
 using Customer.API.Persistence;
-using Customer.API.Repositories;
-using Customer.API.Repositories.Interfaces;
-using Customer.API.Services;
-using Customer.API.Services.Interfaces;
 using Hangfire;
-using Infrastructure.Common.Repositories;
 using Infrastructure.ScheduledJobs;
-using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 

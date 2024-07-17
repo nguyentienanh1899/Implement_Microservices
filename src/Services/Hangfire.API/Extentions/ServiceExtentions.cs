@@ -1,5 +1,4 @@
 ﻿using Shared.Configurations;
-using System.Runtime.CompilerServices;
 
 namespace Hangfire.API.Extentions
 {

@@ -17,7 +17,7 @@ namespace Hangfire.API.Extentions
             }).UseSerilog(Serilogger.Configure);
         }
 
-        internal static IApplicationBuilder UseHangfireDashboard(this IApplicationBuilder app, IConfiguration configuration) 
+        internal static IApplicationBuilder UseHangfireDashboard(this IApplicationBuilder app, IConfiguration configuration)
         {
             var configDashboard = configuration.GetSection("HangFireSettings:Dashboard").Get<DashboardOptions>();
             var hangfireSettings = configuration.GetSection("HangFireSettings").Get<HangFireSettings>();
