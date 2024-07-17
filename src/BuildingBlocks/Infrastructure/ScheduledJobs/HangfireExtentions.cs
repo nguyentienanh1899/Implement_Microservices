@@ -4,6 +4,7 @@ using Hangfire.Console.Extensions;
 using Hangfire.Mongo;
 using Hangfire.Mongo.Migration.Strategies;
 using Hangfire.Mongo.Migration.Strategies.Backup;
+using Hangfire.PostgreSql;
 using Infrastructure.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
@@ -82,6 +83,7 @@ namespace Infrastructure.ScheduledJobs
                     services.AddHangfireConsoleExtensions();
                     break;
                 case "postgresql":
+                    services.AddHangfire(options => options.UsePostgreSqlStorage(hangFireSetting.Storage.ConnectionString));
                     break;
                 case "mssql":
                     break;

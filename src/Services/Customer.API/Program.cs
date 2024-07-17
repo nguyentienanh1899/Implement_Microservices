@@ -1,12 +1,15 @@
 using Common.Logging;
 using Contracts.Common.Interfaces;
 using Customer.API.Controllers;
+using Customer.API.Extentions;
 using Customer.API.Persistence;
 using Customer.API.Repositories;
 using Customer.API.Repositories.Interfaces;
 using Customer.API.Services;
 using Customer.API.Services.Interfaces;
+using Hangfire;
 using Infrastructure.Common.Repositories;
+using Infrastructure.ScheduledJobs;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -21,18 +24,17 @@ try
     builder.Host.UseSerilog(Serilogger.Configure);
     // Add services to the container.
 
+    builder.Services.AddConfigurationSettings(builder.Configuration);
+    builder.Services.ConfigureCustomerContext();
+    //add Service life cycle
+    builder.Services.AddInfrastructureServices();
+
+    builder.Services.AddHangfireServiceCustom();
+
     builder.Services.AddControllers();
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
-
-    var connectionString = builder.Configuration.GetConnectionString("DefaultConnectionString");
-    builder.Services.AddDbContext<CustomerContext>(options => options.UseNpgsql(connectionString));
-
-    //add Service life cycle
-    builder.Services.AddScoped<ICustomerRepository, CustomerRepository>()
-        .AddScoped(typeof(IRepositoryQueryBase<,,>), typeof(RepositoryQueryBase<,,>))
-        .AddScoped<ICustomerService, CustomerService>();
 
     var app = builder.Build();
 
@@ -53,6 +55,8 @@ try
     //app.UseHttpsRedirection();
 
     app.UseAuthorization();
+
+    app.UseHangfireDashboard(builder.Configuration);
 
     app.MapControllers();
 

@@ -1,8 +1,9 @@
 ﻿using Common.Logging;
+using Hangfire;
 using Serilog;
 using Shared.Configurations;
 
-namespace Hangfire.API.Extentions
+namespace Customer.API.Extentions
 {
     public static class HostExtentions
     {
@@ -10,14 +11,14 @@ namespace Hangfire.API.Extentions
         {
             host.ConfigureAppConfiguration((context, config) =>
             {
-                var env = context.HostingEnvironment;
+                var evn = context.HostingEnvironment;
                 config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                    .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
-                    .AddEnvironmentVariables();
-            }).UseSerilog(Serilogger.Configure);
+                        .AddJsonFile($"appsettings.{evn.EnvironmentName}.json", optional: true, reloadOnChange: true)
+                        .AddEnvironmentVariables();
+            }).UseSerilog(Serilogger.Configure); ;
         }
 
-        internal static IApplicationBuilder UseHangfireDashboard(this IApplicationBuilder app, IConfiguration configuration) 
+        internal static IApplicationBuilder UseHangfireDashboard(this IApplicationBuilder app, IConfiguration configuration)
         {
             var configDashboard = configuration.GetSection("HangFireSettings:Dashboard").Get<DashboardOptions>();
             var hangfireSettings = configuration.GetSection("HangFireSettings").Get<HangFireSettings>();
