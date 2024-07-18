@@ -1,4 +1,6 @@
-﻿using Shared.Configurations;
+﻿using Contracts.ScheduledJobs;
+using Infrastructure.ScheduledJobs.Services;
+using Shared.Configurations;
 
 namespace Hangfire.API.Extentions
 {
@@ -8,6 +10,12 @@ namespace Hangfire.API.Extentions
         {
             var hangFireSettings = configuration.GetSection(nameof(HangFireSettings)).Get<HangFireSettings>();
             services.AddSingleton(hangFireSettings);
+            return services;
+        }
+
+        public static IServiceCollection ConfigureServices(this IServiceCollection services)
+        {
+            services.AddTransient<IScheduledJobService, HangfireServices>();
             return services;
         }
     }

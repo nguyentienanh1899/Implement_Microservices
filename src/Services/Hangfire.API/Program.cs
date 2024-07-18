@@ -18,6 +18,8 @@ try
     // Add services to the container.
 
     builder.Services.AddHangfireServiceCustom();
+    builder.Services.ConfigureServices();
+
     var app = builder.Build();
 
     if (app.Environment.IsDevelopment())
