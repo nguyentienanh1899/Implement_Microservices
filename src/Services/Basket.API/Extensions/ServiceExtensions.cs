@@ -1,6 +1,8 @@
 ﻿using Basket.API.GrpcServices;
 using Basket.API.Repositories;
 using Basket.API.Repositories.Interfaces;
+using Basket.API.Services;
+using Basket.API.Services.Interfaces;
 using Contracts.Common.Interfaces;
 using EventBus.Messages.IntegrationEvents.Interfaces;
 using Infrastructure.Common;
@@ -16,7 +18,8 @@ namespace Basket.API.Extensions
     {
         public static IServiceCollection ConfigureServices(this IServiceCollection services) =>
             services.AddScoped<IBasketRepository, BasketRepository>()
-            .AddTransient<ISerializeService, SerializeService>();
+            .AddTransient<ISerializeService, SerializeService>()
+            .AddTransient<IEmailTemplateService, BasketEmailTemplateService>();
 
         public static IServiceCollection AddConfigurationSettings(this IServiceCollection services, IConfiguration configuration)
         {
@@ -28,6 +31,9 @@ namespace Basket.API.Extensions
 
             var grpcSettings = configuration.GetSection(nameof(GrpcSettings)).Get<GrpcSettings>();
             services.AddSingleton(grpcSettings);
+
+            var backgroundScheduledJobSettings = configuration.GetSection(nameof(BackgroundScheduledJobSettings)).Get<BackgroundScheduledJobSettings>();
+            services.AddSingleton(backgroundScheduledJobSettings);
 
             return services;
         }
@@ -74,6 +80,11 @@ namespace Basket.API.Extensions
             services.AddGrpcClient<StockProtoService.StockProtoServiceClient>(x => x.Address = new Uri(settings.StockUrl));
             services.AddScoped<StockItemGrpcService>();
             return services;
+        }
+
+        public static void ConfigureHttpClientService(this IServiceCollection services)
+        {
+            services.AddHttpClient<BackgroundScheduledJobHttpService>();
         }
     }
 }

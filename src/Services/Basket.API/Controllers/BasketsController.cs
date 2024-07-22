@@ -2,6 +2,7 @@
 using Basket.API.Entities;
 using Basket.API.GrpcServices;
 using Basket.API.Repositories.Interfaces;
+using Basket.API.Services.Interfaces;
 using EventBus.Messages.IntegrationEvents.Events;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
@@ -49,8 +50,8 @@ namespace Basket.API.Controllers
 
 
             var options = new DistributedCacheEntryOptions()
-                                .SetAbsoluteExpiration(DateTime.UtcNow.AddHours(1)) //Cache exists in time
-                                .SetSlidingExpiration(TimeSpan.FromMinutes(10));    //Track how long there is no activity
+                                .SetAbsoluteExpiration(DateTime.UtcNow.AddHours(12)) //Cache exists in time
+                                .SetSlidingExpiration(TimeSpan.FromDays(10));    //Track how long there is no activity
 
             var result = await _repository.UpdateBasket(cart, options);
             return Ok(result);

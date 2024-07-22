@@ -1,7 +1,10 @@
 ﻿using Basket.API.Entities;
 using Basket.API.Repositories.Interfaces;
+using Basket.API.Services;
+using Basket.API.Services.Interfaces;
 using Contracts.Common.Interfaces;
 using Microsoft.Extensions.Caching.Distributed;
+using Shared.DTOs.ScheduledJobs;
 using ILogger = Serilog.ILogger;
 
 namespace Basket.API.Repositories
@@ -11,10 +14,14 @@ namespace Basket.API.Repositories
         private readonly IDistributedCache _redisCacheService;
         private readonly ISerializeService _sericalizeService;
         private readonly ILogger _logger;
-        public BasketRepository(IDistributedCache redisCacheService, ISerializeService sericalizeService, ILogger logger)
+        private readonly BackgroundScheduledJobHttpService _backgroundScheduledJobHttpService;
+        private readonly IEmailTemplateService _emailTemplateService;
+        public BasketRepository(BackgroundScheduledJobHttpService backgroundScheduledJobHttpService, IDistributedCache redisCacheService, ISerializeService sericalizeService, ILogger logger, IEmailTemplateService emailTemplateService)
         {
             _redisCacheService = redisCacheService;
+            _emailTemplateService = emailTemplateService;
             _sericalizeService = sericalizeService;
+            _backgroundScheduledJobHttpService = backgroundScheduledJobHttpService;
             _logger = logger;
         }
         public async Task<bool> DeleteBasketFromUserName(string userName)
@@ -51,7 +58,23 @@ namespace Basket.API.Repositories
                 await _redisCacheService.SetStringAsync(cart.UserName, _sericalizeService.Serialize(cart));
             }
             _logger.Information($"Complete UpdateBasket {cart.UserName}");
+
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex.Message);
+            }
             return await GetBasketByUserName(cart.UserName);
+        }
+
+        private async Task TriggerSendEmailReminderPaymentOrder(Cart cart)
+        {
+            var emailTemplate = _emailTemplateService.GenerateReminderPaymentOrderEmail(cart.UserName);
+            var model = new ReminderPaymentOrderDto(cart.EmailAddress, "Payment Due for Your Recent Order", emailTemplate, DateTimeOffset.UtcNow.AddSeconds(30));
+
         }
     }
 }
