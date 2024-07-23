@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Shared.DTOs.ScheduledJobs;
+using System.ComponentModel.DataAnnotations;
 
 namespace Hangfire.API.Controllers
 {
@@ -21,6 +22,14 @@ namespace Hangfire.API.Controllers
         {
             var jobId = _jobService.SendEmailContent(model.email, model.subject, model.emailContent, model.futureExactTime);
             return Ok(jobId);
+        }
+
+        [HttpDelete]
+        [Route("delete/jobId/{id}")]
+        public IActionResult DeleteJobId([Required]string id)
+        {
+            var result = _jobService.ScheduledJob.Delete(id);
+            return Ok(result);
         }
     }
 }

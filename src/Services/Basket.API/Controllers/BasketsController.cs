@@ -7,6 +7,7 @@ using EventBus.Messages.IntegrationEvents.Events;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
+using Shared.DTOs.Basket;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
 
@@ -30,16 +31,17 @@ namespace Basket.API.Controllers
         }
 
         [HttpGet("{username}", Name = "GetBasket")]
-        [ProducesResponseType(typeof(Cart), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<Cart>> GetBasketByUserName([Required] string username)
+        [ProducesResponseType(typeof(CartDto), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<CartDto>> GetBasketByUserName([Required] string username)
         {
-            var result = await _repository.GetBasketByUserName(username);
-            return Ok(result ?? new Entities.Cart());
+            var cartEntity = await _repository.GetBasketByUserName(username);
+            var result = _mapper.Map<CartDto>(cartEntity) ?? new CartDto();
+            return Ok(result);
         }
 
         [HttpPost(Name = "UpdateBasket")]
         [ProducesResponseType(typeof(Cart), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<Cart>> UpdateBasket([FromBody] Cart cart)
+        public async Task<ActionResult<CartDto>> UpdateBasket([FromBody] CartDto cart)
         {
             // Communicate with Inventory.Grpc and check quantity availabel of products
             foreach (var item in cart.Items)
@@ -52,8 +54,9 @@ namespace Basket.API.Controllers
             var options = new DistributedCacheEntryOptions()
                                 .SetAbsoluteExpiration(DateTime.UtcNow.AddHours(12)) //Cache exists in time
                                 .SetSlidingExpiration(TimeSpan.FromDays(10));    //Track how long there is no activity
-
-            var result = await _repository.UpdateBasket(cart, options);
+            var cartEntity = _mapper.Map<Cart>(cart);
+            var updateCart = await _repository.UpdateBasket(cartEntity, options);
+            var result = _mapper.Map<CartDto>(updateCart);
             return Ok(result);
         }
 
