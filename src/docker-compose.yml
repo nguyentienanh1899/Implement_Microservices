@@ -68,6 +68,12 @@ services:
     build:
         context: .
         dockerfile: ApiGateWays/OcelotApiGw/Dockerfile
+
+  hangfire.api:
+    image: ${DOCKER_REGISTRY-}hangfire-api:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+        context: .
+        dockerfile: Services/Hangfire.API/Dockerfile
 #networks section
 networks:
   default:

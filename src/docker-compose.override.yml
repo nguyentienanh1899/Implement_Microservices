@@ -135,6 +135,7 @@ services:
         - ASPNETCORE_ENVIRONMENT=Development
         - ASPNETCORE_URLS=http://+:80
         - "ConnectionStrings:DefaultConnectionString=Server=customerdb;Port=5432;Database=CustomerDb;User Id=admin;Password=Anhnguyen18;"
+        - "HangFireSettings:Storage:ConnectionString=Server=customerdb;Port=5432;Database=CustomerDb;User Id=admin;Password=Anhnguyen18;"
     depends_on:
         - customerdb
     ports:
@@ -149,6 +150,8 @@ services:
         - "CacheSettings:ConnectionString=basketdb:6379"
         - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
         - "GrpcSettings:StockUrl=http://inventory.grpc"
+        - BackgroundScheduledJobSettings:HangfireUrl=http://hangfire.api
+        - BackgroundScheduledJobSettings:PaymentOrderUrl=http://localhost:6001
     depends_on:
         - basketdb
         - rabbitmq
@@ -211,4 +214,16 @@ services:
         - product.api
     ports:
         - "6001:80" #Docker containers run on a separate port for easy distinction.
+    restart: always
+
+  hangfire.api:
+    container_name: hangfire.api
+    environment:
+        - ASPNETCORE_ENVIRONMENT=Development
+        - ASPNETCORE_URLS=http://+:80
+        - HangFireSettings:Storage:ConnectionString=mongodb://admin:admin@hangfiredb/hangfire-webapi?authSource=admin
+    depends_on:
+        - hangfiredb
+    ports:
+        - "6008:80" #Docker containers run on a separate port for easy distinction.
     restart: always

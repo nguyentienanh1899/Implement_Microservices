@@ -11,7 +11,7 @@ namespace Basket.API.Services
 
         public string GenerateReminderPaymentOrderEmail(string username)
         {
-            var orderPaymentLink = $"{BackgroundScheduledJobSettings.ApiGwUrl}/{BackgroundScheduledJobSettings.BasketUrl}/{username}";
+            var orderPaymentLink = $"{BackgroundScheduledJobSettings.PaymentOrderUrl}/{BackgroundScheduledJobSettings.BasketUrl}/{username}";
             var emailText = ReadEmailTemplateContent("order-payment-reminder");
             var emailSendCustomerText = emailText.Replace("[username]", username).Replace("[orderPaymentLink]", orderPaymentLink);
             return emailSendCustomerText;

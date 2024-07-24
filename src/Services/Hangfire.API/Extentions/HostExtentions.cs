@@ -25,7 +25,7 @@ namespace Hangfire.API.Extentions
 
             app.UseHangfireDashboard(hangfireRoute, new DashboardOptions
             {
-                //Authorization = 
+                Authorization = new[] {new AuthorizationFilter()}, // Temporarily authorizes the configuration so that the console can be used on every other local field. Because the console automatically opens only for each local server field, other environments are required to have permissions
                 DashboardTitle = configDashboard.DashboardTitle,
                 StatsPollingInterval = configDashboard.StatsPollingInterval,
                 AppPath = configDashboard.AppPath,
