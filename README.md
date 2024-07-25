@@ -53,5 +53,18 @@ Query Tool run command:
 - ProductContextSeed: Create sample data and insert into the database. Sample data is automatically added when running the program
 
 ## Basket.API
+- Crud Basket API with database using Redis.
+- Publish and Consume Messages with MassTransit and RabbitMQ in .Net 6
+- Implementing gRPC Services in .NET 6 (client)
+- DDD, Event Sourcing, CQRS parttern for Basket.API and Ordering API
 
 ## Inventory API
+- Implementing gRPC Services in .NET 6 (server)
+
+## Hangfire API
+- BackgroundJobScheduled with HangFire.
+
+## API GateWay
+- Implement api gateway in .net core
+- Config RateLimit, Caching respone with Redis, QOS, Authentication on API gate way
+- Ocelot json config routing for child APIs
