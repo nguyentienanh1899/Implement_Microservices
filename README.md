@@ -62,7 +62,7 @@ Query Tool run command:
 - Implementing gRPC Services in .NET 6 (server)
 
 ## Hangfire API
-- BackgroundJobScheduled with HangFire.
+- BackgroundJobScheduled with HangFire. (Auto Send Mail reminder payment to customer when basket update)
 
 ## API GateWay
 - Implement api gateway in .net core
