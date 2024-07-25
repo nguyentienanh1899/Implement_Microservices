@@ -66,5 +66,5 @@ Query Tool run command:
 
 ## API GateWay
 - Implement api gateway in .net core
-- Config RateLimit, Caching respone with Redis, QOS, Authentication on API gate way
+- Config RateLimit, Caching respone, QOS, Authentication on API gate way
 - Ocelot json config routing for child APIs
