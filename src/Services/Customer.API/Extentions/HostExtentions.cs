@@ -1,5 +1,7 @@
 ﻿using Common.Logging;
 using Hangfire;
+using Infrastructure.Extensions;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Serilog;
 using Shared.Configurations;
 
@@ -26,7 +28,7 @@ namespace Customer.API.Extentions
 
             app.UseHangfireDashboard(hangfireRoute, new DashboardOptions
             {
-                //Authorization = 
+                Authorization = new[] { new AuthorizationFilter() },
                 DashboardTitle = configDashboard.DashboardTitle,
                 StatsPollingInterval = configDashboard.StatsPollingInterval,
                 AppPath = configDashboard.AppPath,

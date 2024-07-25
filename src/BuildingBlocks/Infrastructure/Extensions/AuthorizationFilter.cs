@@ -1,7 +1,6 @@
-﻿using Hangfire.Annotations;
-using Hangfire.Dashboard;
+﻿using Hangfire.Dashboard;
 
-namespace Hangfire.API.Extentions
+namespace Infrastructure.Extensions
 {
     public class AuthorizationFilter : IDashboardAuthorizationFilter
     {
