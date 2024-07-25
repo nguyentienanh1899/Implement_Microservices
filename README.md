@@ -25,8 +25,22 @@ docker-compose -f docker-compose.yml -f docker-compose.ovveride.yml up -d --remo
 - cd src
 - docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d --remove-orphans --build
 ## Application URLs - Development Environment
-- Product API: http://localhost:5002/api/products
+- Product API: http://localhost:5002/api/
+- Customer API: http://localhost:5003/api/
+- Basket API: http://localhost:5004/api/
+- Hangfire API: http://localhost:5008/api/
+- Ordering API: http://localhost:5005/api/
+- Inventory API: http://localhost:5006/api/
+- API Gateway: http://localhost:5001/api/
 
+## Application URLs - Docker:
+- Product API: http://localhost:6002/api/
+- Customer API: http://localhost:6003/api/
+- Basket API: http://localhost:6004/api/
+- Hangfire API: http://localhost:6008/api/
+- Ordering API: http://localhost:6005/api/
+- Inventory API: http://localhost:6006/api/
+- API Gateway: http://localhost:6001/api/
 
 ## Customer.API
 Install PostgreSql, PgAdmin4
@@ -59,9 +73,11 @@ Query Tool run command:
 - DDD, Event Sourcing, CQRS parttern for Basket.API and Ordering API
 
 ## Inventory API
+- Using Mongo DB
 - Implementing gRPC Services in .NET 6 (server)
 
 ## Hangfire API
+- Using Mongo DB
 - BackgroundJobScheduled with HangFire. (Auto Send Mail reminder payment to customer when basket update)
 
 ## API GateWay
