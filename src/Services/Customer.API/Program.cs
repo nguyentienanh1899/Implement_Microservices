@@ -35,14 +35,14 @@ try
     app.MapCustomersAPI();
 
     // Configure the HTTP request pipeline.
-    if (app.Environment.IsDevelopment())
-    {
+    //if (app.Environment.IsDevelopment())
+    //{
         app.UseSwagger();
         app.UseSwaggerUI(s =>
         {
             s.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger Customer Minimal API v1");
         });
-    }
+    //}
 
     app.UseRouting();
     //app.UseHttpsRedirection();

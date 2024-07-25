@@ -132,10 +132,10 @@ services:
   customer.api:
     container_name: customer.api
     environment:
-        - ASPNETCORE_ENVIRONMENT=Development
+        - ASPNETCORE_ENVIRONMENT=Local
         - ASPNETCORE_URLS=http://+:80
-        - "ConnectionStrings:DefaultConnectionString=Server=customerdb;Port=5432;Database=CustomerDb;User Id=admin;Password=Anhnguyen18;"
-        - "HangFireSettings:Storage:ConnectionString=Server=customerdb;Port=5432;Database=CustomerDb;User Id=admin;Password=Anhnguyen18;"
+        # - "ConnectionStrings:DefaultConnectionString=Server=customerdb;Port=5432;Database=CustomerDb;User Id=admin;Password=Anhnguyen18;"
+        # - "HangFireSettings:Storage:ConnectionString=Server=customerdb;Port=5432;Database=CustomerDb;User Id=admin;Password=Anhnguyen18;"
     depends_on:
         - customerdb
     ports:
