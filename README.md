@@ -9,7 +9,13 @@ docker-compose -f docker-compose.yml -f docker-compose.ovveride.yml up -d --remo
 ```
 
 ## Application URLs - Local Environment (Docker Container)
-- Product API: http://localhost:6002/api/products
+- Product API: http://localhost:6002/api/
+- Customer API: http://localhost:6003/api/
+- Basket API: http://localhost:6004/api/
+- Hangfire API: http://localhost:6008/api/
+- Ordering API: http://localhost:6005/api/
+- Inventory API: http://localhost:6006/api/
+- API Gateway: http://localhost:6001/api/
 
 ## Docker Application URLs - Local Environment (Docker Container)
 - Portainer: http://localhost:9000 - user: admin ; pass: admin123456789
@@ -32,15 +38,6 @@ docker-compose -f docker-compose.yml -f docker-compose.ovveride.yml up -d --remo
 - Ordering API: http://localhost:5005/api/
 - Inventory API: http://localhost:5006/api/
 - API Gateway: http://localhost:5001/api/
-
-## Application URLs - Docker:
-- Product API: http://localhost:6002/api/
-- Customer API: http://localhost:6003/api/
-- Basket API: http://localhost:6004/api/
-- Hangfire API: http://localhost:6008/api/
-- Ordering API: http://localhost:6005/api/
-- Inventory API: http://localhost:6006/api/
-- API Gateway: http://localhost:6001/api/
 
 ## Customer.API
 Install PostgreSql, PgAdmin4
