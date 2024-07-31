@@ -19,6 +19,10 @@ namespace Ordering.Infrastructure.Repositories
             return order;
         }
 
+        public void DeleteOrder(Order order) => Delete(order);
+
+        public Task<Order> GetOrderByDocumentNo(string documentNo) => FindByCondition(x => x.DocumentNo.ToString().Equals(documentNo)).FirstOrDefaultAsync();
+
         public async Task<IEnumerable<Order>> GetOrdersByUserName(string userName) => await FindByCondition(x => x.UserName.Equals(userName)).ToListAsync();
 
         public async Task<Order> UpdateOrderAsync(Order order)
