@@ -89,7 +89,7 @@ namespace Ordering.API.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{document-no/{documentNo}", Name = RouteNames.DeleteOrderByDocumentNo)]
+        [HttpDelete("document-no/{documentNo}", Name = RouteNames.DeleteOrderByDocumentNo)]
         [ProducesResponseType(typeof(ApiResult<bool>), (int)HttpStatusCode.NoContent)]
         public async Task<ApiResult<bool>> DeleteOrderByDocumentNo([Required] string documentNo)
         {

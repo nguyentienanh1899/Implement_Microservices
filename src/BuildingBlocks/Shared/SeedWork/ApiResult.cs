@@ -1,7 +1,10 @@
-﻿namespace Shared.SeedWork
+﻿using System.Text.Json.Serialization;
+
+namespace Shared.SeedWork
 {
     public class ApiResult<T>
     {
+        [JsonConstructor]
         public ApiResult()
         {
 

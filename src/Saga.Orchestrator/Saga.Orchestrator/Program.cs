@@ -1,4 +1,5 @@
 using Saga.Orchestrator.Extentions;
+using Saga.Orchestrator.Mapping;
 using Serilog;
 
 Log.Logger = new LoggerConfiguration().WriteTo.Console().CreateBootstrapLogger();
@@ -10,6 +11,14 @@ try
 {
     // Add services to the container.
     builder.Host.AddAppConfigurations();
+
+    builder.Services.ConfigureServices();
+    builder.Services.ConfigureHttpRepository();
+    builder.Services.ConfigureHttpClients();
+
+    builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
+    builder.Services.AddAutoMapper(cfg => cfg.AddProfile(new MappingProfile()));
+
     builder.Services.AddControllers();
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();

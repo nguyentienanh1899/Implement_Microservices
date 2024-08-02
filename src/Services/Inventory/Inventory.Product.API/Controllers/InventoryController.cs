@@ -64,5 +64,16 @@ namespace Inventory.Product.API.Controllers
             await _inventoryServices.DeleteAsync(id);
             return NoContent();
         }
+
+        [Route("sales/{itemNo}", Name = "SalesOrder")]
+        [HttpPost]
+        [ProducesResponseType(typeof(InventoryEntryDto), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<InventoryEntryDto>> SalesOrder([Required] string itemNo, [FromBody] SalesProductDto model)
+        {
+            model.SetItemNo(itemNo);
+            var result = await _inventoryServices.SalesItemAsync(itemNo, model);
+            return Ok(result);
+        }
+
     }
 }
