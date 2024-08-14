@@ -4,12 +4,12 @@ namespace Shared.SeedWork
 {
     public class ApiResult<T>
     {
-        [JsonConstructor]
         public ApiResult()
         {
 
         }
 
+        [JsonConstructor]
         public ApiResult(bool isSucceeded, string message = null)
         {
             Message = message;
