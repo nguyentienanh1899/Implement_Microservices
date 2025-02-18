@@ -3,9 +3,12 @@
     public enum TriggerOrderAction
     {
         GetBasket,
+        DeleteBasket,
         CreateOrder,
         GetOrder,
+        DeleteOrder,
         UpdateInventory,
-        RollbackInventory
+        DeleteInventory,
+        RollbackInventory,
     }
 }
