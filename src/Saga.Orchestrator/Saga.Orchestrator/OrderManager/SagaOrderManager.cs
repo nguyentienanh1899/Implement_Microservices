@@ -4,6 +4,7 @@ using Saga.Orchestrator.HttpRepository.Interfaces;
 using Shared.DTOs.Basket;
 using Shared.DTOs.Inventory;
 using Shared.DTOs.Order;
+using ILogger = Serilog.ILogger;
 
 namespace Saga.Orchestrator.OrderManager
 {
@@ -41,7 +42,9 @@ namespace Saga.Orchestrator.OrderManager
             orderStateMachine.Configure(OrderTransactionState.BasketGot)
                 .PermitDynamic(TriggerOrderAction.CreateOrder, () =>
                 {
+                    //input.TotalPrice = cart.TotalPrice;
                     var order = _mapper.Map<CreateOrderDto>(input);
+                    order.TotalPrice = cart.TotalPrice;
                     orderId = _orderHttpRepository.CreateOrder(order).Result;
                     return orderId > 0 ? OrderTransactionState.OrderCreated : OrderTransactionState.OrderCreatedFailed;
                 }).OnEntry(() => orderStateMachine.Fire(TriggerOrderAction.CreateOrder));
@@ -65,6 +68,13 @@ namespace Saga.Orchestrator.OrderManager
                     inventoryDocumentNo = _inventoryHttpRepository.CreateOrderSale(addedOrder.DocumentNo, salesOrder).Result;
                     return inventoryDocumentNo != null ? OrderTransactionState.InventoryUpdated : OrderTransactionState.InventoryUpdateFailed;
                 }).OnEntry(() => orderStateMachine.Fire(TriggerOrderAction.UpdateInventory));
+
+            orderStateMachine.Configure(OrderTransactionState.InventoryUpdated)
+                .PermitDynamic(TriggerOrderAction.DeleteBasket, () =>
+                {
+                  var result = _basketHttpRepository.DeleteBasket(input.UserName).Result;
+                    return result ? OrderTransactionState.BasketDeleted : OrderTransactionState.InventoryUpdateFailed;
+                }).OnEntry(() => orderStateMachine.Fire(TriggerOrderAction.DeleteBasket));
 
             orderStateMachine.Fire(TriggerOrderAction.GetBasket);
             return new OrderResponse(orderStateMachine.State == OrderTransactionState.InventoryUpdated);

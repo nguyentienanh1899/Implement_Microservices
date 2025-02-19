@@ -5,12 +5,17 @@
         NotStarted,
         BasketGot,
         BasketGetFailed,
+        BasketDeleted,
         OrderCreated,
         OrderCreatedFailed,
+        OrderDeleted,
+        OrderDeletedFailed,
         OrderGot,
         OrderGetFailed,
         InventoryUpdated,
         InventoryUpdateFailed,
-        InventoryRollback
+        RollbackInventory,
+        InventoryRollbackSuccess,
+        InventoryRollbackFailed,
     }
 }
